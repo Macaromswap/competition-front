@@ -40,6 +40,10 @@ const TableBox = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    min-width: 980px;
+    @media screen and (max-width: 690px) {
+        min-width: auto;
+    }
 `
 const LeftTable = styled.div`
     width: 580px;
@@ -134,7 +138,7 @@ const FelxText = styled.div`
 `
 const AnalysisBox = styled.div`
     display: flex;
-    padding: 20px 48px;
+    padding: 20px 18px;
     align-items: center;
     gap: 48px;
     border: 2px solid var(--Black, #24282B);
@@ -142,6 +146,7 @@ const AnalysisBox = styled.div`
     height: 140px;
     box-sizing: border-box;
     margin-bottom: 20px;
+    justify-content: center;
     @media screen and (max-width: 1000px) {
         border-radius: 14px;
         border: 2px solid var(--Black, #0B0F17);
@@ -149,7 +154,6 @@ const AnalysisBox = styled.div`
         box-shadow: 4px 4px 0px 0px #000;
     }
     @media screen and (max-width: 690px) {
-        justify-content: center;
         padding: 24px 0px;
         gap: 30px;
         height: auto;
@@ -227,31 +231,34 @@ function Home() {
             start_time: 17175024000000,
             end_time: 17178047400000,
             limit: 70,
-            // wallet_address: '0x2c70b21536d2d003b07995de2eab93fa078d6275'
         }
         if(userAddress){
             params.wallet_address= userAddress
         }
-        getSwapRank(activeNetwork, params).then((res) => {
-            const {list, total, current} = res.data
-            setRankData(list)
-            const swaptotal = total || 0
-            setRankTotal(swaptotal)
-            if(current){
-                setRankCurrent(current)
-            }
-        })
-        getSwapTx(activeNetwork, params).then(res => {
-            const {list, total, current} = res.data
-            setTxData(list)
-            const txtotal = total || 0
-            const perc = txtotal / 100000 * 100
-            setPercent(perc)
-            setTxTotal(txtotal)
-            if(current){
-                setTxCurrent(current)
-            }
-        })
+        const timer = setInterval(() => {
+            getSwapRank(activeNetwork, params).then((res) => {
+                const {list, total, current} = res.data
+                setRankData(list)
+                const swaptotal = total || 0
+                setRankTotal(swaptotal)
+                if(current){
+                    setRankCurrent(current)
+                }
+            })
+            getSwapTx(activeNetwork, params).then(res => {
+                const {list, total, current} = res.data
+                setTxData(list)
+                const txtotal = total || 0
+                const perc = txtotal / 100000 * 100
+                setPercent(perc)
+                setTxTotal(txtotal)
+                if(current){
+                    setTxCurrent(current)
+                }
+            })
+        }, 6000);
+      
+        return () => clearInterval(timer);
     }, [userAddress]);
     const openModal = (type) => {
         setType(type)
