@@ -208,7 +208,7 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-6-8 7:59:00'
+    const targetDate = '2024-06-08 07:59:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
