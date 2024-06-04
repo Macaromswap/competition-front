@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TextStyle } from '../../components/Text/TextCss'
+import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,7 @@ const StatusText = styled.div`
 
 
 const Gauge = ({ percentage }) => {
+    const { t, i18n } = useTranslation();
     const size = '100%';
     const radius = 37; /* 将半径修改为42 */
     const circumference = 2 * Math.PI * radius;
@@ -68,7 +70,7 @@ const Gauge = ({ percentage }) => {
             </Svg>
             <StatusText>
                 <TextStyle color={'#24282B'} size={20} hsize={18}>{`${percentage.toFixed(2)}%`}</TextStyle>
-                <TextStyle color={'#24282B'} size={12}>当前进度</TextStyle>
+                <TextStyle color={'#24282B'} size={12}>{t('progress')}</TextStyle>
             </StatusText>
         </Container>
     );

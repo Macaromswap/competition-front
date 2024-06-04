@@ -268,10 +268,10 @@ function Home() {
         <Wrapper>
             <Title>
                 <TextStyle size={56} hsize={34} color={'#24282B'}>
-                    <span className={'yellow'}>CBD</span> Trading Competition
+                    <span className={'yellow'}>CBD</span> {t('trading_competition')}
                 </TextStyle>
                 <TextStyle size={20} hsize={14} color={'#24282B'}>
-                    Trade to Split [
+                    {t('trade_to_split')} [
                         <span className={'orange'}> $50,000 BTC</span> + 
                         <span className={'orange'}> 100,000,000CBD</span> + 
                         <span className={'orange'}> 50,000veMACA </span> 

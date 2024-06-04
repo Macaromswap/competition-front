@@ -40,7 +40,7 @@ const Content = styled.div`
     width: 100%;
     max-height: 480px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
     overflow-y: scroll;
 `;
@@ -120,11 +120,11 @@ const PopupComponent = ({open, closeModal, type}) => {
         <div>
             {open && (
                 <Overlay>
-                    <Modal>
+                    <Modal className={'scrollbar'}>
                     <ToggleItme>
                         {
                             <Toggle onClick={closeModal}>
-                                <TextStyle color={'#000'} size={16}>关闭</TextStyle>
+                                <TextStyle color={'#000'} size={16}>{t('close')}</TextStyle>
                             </Toggle>
                         }
                         <CloseImgStyle src={close}/>
