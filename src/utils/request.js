@@ -1,6 +1,6 @@
 import axios from 'axios'
-const baseURL = 'http://47.243.101.119:3101/'
-    // const baseURL = process.env.REACT_APP_BASE_URL
+// const baseURL = 'http://47.243.101.119:3101/'
+const baseURL = process.env.REACT_APP_BASE_URL
 const request = axios.create({
     baseURL,
     timeout: 20000,
