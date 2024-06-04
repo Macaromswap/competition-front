@@ -234,7 +234,7 @@ const PopupComponent = ({open, closeModal, type}) => {
                                     <TextStyle color={'#6A6969'} size={16}>{t('right_1_text1')} </TextStyle>
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('left_title2')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('right_title2')}</TextStyle>
                                     <TextStyle color={'#6A6969'} size={16}>
                                         {t('right_2_text1')}<br />
                                         {t('right_2_text2')}<br />
@@ -245,13 +245,13 @@ const PopupComponent = ({open, closeModal, type}) => {
                                      </TextStyle> 
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('left_title3')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('right_title3')}</TextStyle>
                                     <TextStyle color={'#6A6969'} size={16}>
                                         {t('right_3_text1')}
                                      </TextStyle> 
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('left_title4')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('right_title4')}</TextStyle>
                                     <TextStyle color={'#6A6969'} size={16}>
                                         {t('right_4_text1')}<br />
                                         {t('right_4_text2')}<br />
