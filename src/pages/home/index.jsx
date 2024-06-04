@@ -221,8 +221,8 @@ function Home() {
         }
     }, [lang])
     const tabItems = [
-        { label: t('Number of Transactions'), index: 1 },
-        { label: t('Trading Volumes'), index: 2 },
+        { label: t('trans_number'), index: 1 },
+        { label: t('tr_vol'), index: 2 },
     ]
     const handleTabClick = (index) => {
         setActiveTab(index);
