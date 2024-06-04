@@ -20,19 +20,19 @@ import RightTooltip from "../../components/RightTooltip";
 import Gauge from "../../components/Gauge";
 import PopUp from "../../components/PopUp";
 import Countdown from "../../components/Countdown";
+import { toMacaronRoute } from "../../utils";
 
 const Wrapper = styled.div`
 `
 const Title = styled.div`
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 36px;
     @media screen and (max-width: 690px) {
         text-align: left;
-        margin-bottom: 36px;
-        div{
-            &:nth-child(1) {
-                margin-bottom: 10px;
-            }
+    }
+    div{
+        &:nth-child(1) {
+            margin-bottom: 10px;
         }
     }
 `
@@ -70,7 +70,7 @@ const FlexStyle = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    margin-bottom: 48px;
+    margin-bottom: 29px;
     @media screen and (max-width: 600px) {
         margin-bottom: 24px;
     }
@@ -121,8 +121,10 @@ const FelxTextStyle = styled.div`
     display: flex;
     align-items: baseline;
     margin-bottom: 12px;
+    gap: 6px;
     @media screen and (max-width: 690px) {
         justify-content: center;
+        flex-wrap: wrap;
     }
 `
 const FelxText = styled.div`
@@ -132,12 +134,12 @@ const FelxText = styled.div`
 `
 const AnalysisBox = styled.div`
     display: flex;
-    padding: 30px 48px;
-    align-items: flex-start;
+    padding: 20px 48px;
+    align-items: center;
     gap: 48px;
     border: 2px solid var(--Black, #24282B);
     background: #FFF;
-    height: 180px;
+    height: 140px;
     box-sizing: border-box;
     margin-bottom: 20px;
     @media screen and (max-width: 1000px) {
@@ -158,12 +160,18 @@ const FlexColumn = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 8px;
+    gap: 2px;
 `
 
 const FlexVolume = styled.div`
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    @media screen and (max-width: 690px) {
+        img {
+            display: none;
+        }
+    }
 `
 const ImgStar = styled.img`
     width: 16px;
@@ -196,7 +204,7 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-6-30 23:59:59'
+    const targetDate = '2024-6-8 7:59:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
@@ -216,8 +224,8 @@ function Home() {
     }
     useEffect(() => {
         const params = {
-            start_time: 1716134400000,
-            end_time: 1716912000000,
+            start_time: 17175024000000,
+            end_time: 17178047400000,
             limit: 70,
             // wallet_address: '0x2c70b21536d2d003b07995de2eab93fa078d6275'
         }
@@ -252,13 +260,17 @@ function Home() {
     const closeModal = () => {
         setIsOpen(false)
     }
+    const toSwapNow = () => {
+        const route = `/swap?inputCurrency=BTC&outputCurrency=0x2729868df87d062020e4a4867ff507fb52ee697c`
+        toMacaronRoute(route)
+    }
     return(
         <Wrapper>
             <Title>
                 <TextStyle size={56} hsize={34} color={'#24282B'}>
-                    <span className={'orange'}>Macaron</span> x <span className={'yellow'}>CBD</span> Trading Competition
+                    <span className={'yellow'}>CBD</span> Trading Competition
                 </TextStyle>
-                <TextStyle size={30} hsize={14} color={'#24282B'}>
+                <TextStyle size={20} hsize={14} color={'#24282B'}>
                     Trade to Split [
                         <span className={'orange'}> $50,000 BTC</span> + 
                         <span className={'orange'}> 100,000,000CBD</span> + 
@@ -268,22 +280,22 @@ function Home() {
             </Title>
             <BtnStyleH5>
                 <Countdown endDate={targetDate} />
-                <SwapNow>
-                    <TextStyle size={20} color={'#24282B'}>Swap Now</TextStyle>
+                <SwapNow onClick={toSwapNow}>
+                    <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
                 </SwapNow>
                 <Rules onClick={() => openModal(1)}>
-                    <TextStyle size={14} color={'#6A6969'}>View Rules</TextStyle>
+                    <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
                 </Rules>
             </BtnStyleH5>
             <FlexStyle>
                 <LeftimgIcon />
                 <BtnStyle>
                     <Countdown endDate={targetDate} />
-                    <SwapNow>
-                        <TextStyle size={20} color={'#24282B'}>Swap Now</TextStyle>
+                    <SwapNow onClick={toSwapNow}>
+                        <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
                     </SwapNow>
                     <Rules onClick={() => openModal(1)}>
-                        <TextStyle size={14} color={'#6A6969'}>View Rules</TextStyle>
+                        <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
                     </Rules>
                 </BtnStyle>
                 <RightimgIcon />
@@ -293,23 +305,23 @@ function Home() {
             <TableBox>
                 <LeftTable className={activeTab === 1? 'open':'close'}>
                     <FelxTextStyle>
-                        <TextStyle size={20} hsize={16} color={'#24282B'}>达标解锁</TextStyle>
+                        <TextStyle size={20} hsize={16} color={'#24282B'}>{t('reach')}</TextStyle>
                         <TextStyle size={36} hsize={24} color={'#E27625'}>$50000</TextStyle>
-                        <TextStyle size={20} hsize={16} color={'#24282B'}>大奖</TextStyle>
+                        <TextStyle size={20} hsize={16} color={'#24282B'}>{t('dajiang')}</TextStyle>
                         <LeftTooltip />
                         <Image src={question}  onClick={() => openModal(2)}/>
                     </FelxTextStyle>
                     <AnalysisBox>
                         <Gauge percentage={percent} />
                         <FlexColumn>
-                            <TextStyle size={18} hsize={16} color={'#000'}>当前TX数</TextStyle>
+                            <TextStyle size={18} hsize={16} color={'#000'}>{t('tx_number')}</TextStyle>
                             <FelxText>
                                 <TextStyle size={36} hsize={24} color={'#000'}>{formattedNumber(txTotal)} /</TextStyle>
                                 <TextStyle size={20} hsize={16} color={'#6A6969'}>100,000</TextStyle>
                             </FelxText>
                             <FlexVolume>
                                 <ImgStar src={staricon} />
-                                <TextStyle size={18} hsize={16} color={'#000'}>你的交易笔数：</TextStyle>
+                                <TextStyle size={18} hsize={16} color={'#000'}>{t('your_txs')}：</TextStyle>
                                 <TextStyle size={18} hsize={16} color={'#2C9F22'}>{formattedNumber(txCurrent?.swap_count || 0, 0)}</TextStyle>
                             </FlexVolume>
                         </FlexColumn>
@@ -318,20 +330,20 @@ function Home() {
                 </LeftTable>
                 <RightTable className={activeTab === 2? 'open':'close'}>
                     <FelxTextStyle>
-                        <TextStyle size={20} hsize={16} color={'#24282B'}>交易瓜分</TextStyle>
+                        <TextStyle size={20} hsize={16} color={'#24282B'}>{t('prize')}</TextStyle>
                         <TextStyle size={36} hsize={24} color={'#E27625'}>CBD+VeMACAs</TextStyle>
-                        <TextStyle size={20} hsize={16} color={'#24282B'}>奖励</TextStyle>
+                        <TextStyle size={20} hsize={16} color={'#24282B'}>{t('jiangli')}</TextStyle>
                         <RightTooltip/>
                         <Image src={question}  onClick={() => openModal(3)}/>
                     </FelxTextStyle>
                     <AnalysisBox>
                         <ImgIconWidth />
                         <FlexColumn>
-                            <TextStyle size={18} hsize={16} color={'#000'}>当前交易总额</TextStyle>
+                            <TextStyle size={18} hsize={16} color={'#000'}>{t('trading_volume')}</TextStyle>
                             <TextStyle size={36} hsize={24} color={'#24282B'}>$ {formattedNumber(rankTotal)}</TextStyle>
                             <FlexVolume>
                                 <ImgStar src={staricon} />
-                                <TextStyle size={18} hsize={16} color={'#000'}>你的交易总额：</TextStyle>
+                                <TextStyle size={18} hsize={16} color={'#000'}>{t('your_volume')}：</TextStyle>
                                 <TextStyle size={18} hsize={16} color={'#2C9F22'}>{`$ ${formattedNumber(rankCurrent?.swap_amount || 0)}`}</TextStyle>
                             </FlexVolume>
                         </FlexColumn>

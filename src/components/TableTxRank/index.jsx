@@ -179,12 +179,12 @@ const Tables = ({ data }) => {
                         </TableCol>
                         <TableCol>
                             <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
-                                Wallet Address
+                                {t('wallet_address')}
                             </Text>
                         </TableCol>
                         <TableCol>
                             <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
-                                Number of Transactions
+                                {t('trans_number')}
                             </Text>
                         </TableCol>
                     </HeaderRow>

@@ -25,7 +25,8 @@ const Popup = styled.div`
     padding: 20px;
     position: absolute;
     bottom: 46px;
-    transform: translateX(-58%);
+    right: 60%;
+    transform: translateX(16%);
     border-radius: 24px;
     border: 2px solid var(--Text-heading, #000);
     background: #FFF;
@@ -36,8 +37,8 @@ const Popup = styled.div`
 `;
 const SanjxImg = styled(ImgIcon)`
     position: absolute;
-    left: 61%;
-    transform: translateX(-50%);
+    left: 82%;
+    // transform: translateX(-50%);
     bottom: -21.9px;
 `
 const Content = styled.div`

@@ -270,6 +270,7 @@ function Menu() {
             </LeftMenuBox>
             <MiniMenu>
                 <H5menu>
+                    <Wallet />
                     <LanuageImgStyle ref={btnRef} src={lanuage} onClick={showDropdownH5}/>
                     <MenuImg  onClick={toggleDropdown} src={menuIcon}/>
                 </H5menu>
