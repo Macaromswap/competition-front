@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import question from "../../assets/img/question.png";
 import { ReactComponent as ImgIcon } from '../../assets/img/sanjx.svg'
 import { TextStyle } from '../../components/Text/TextCss'
+import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
     position: relative;
@@ -50,7 +51,8 @@ const Content = styled.div`
 `
 
 const RightTooltip = () => {
-  const [showPopup, setShowPopup] = useState(false);
+    const { t, i18n } = useTranslation();
+    const [showPopup, setShowPopup] = useState(false);
 
     return (
         <Container
@@ -62,32 +64,32 @@ const RightTooltip = () => {
                 <SanjxImg />
                 <Content>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>Rewards</TextStyle>
-                        <TextStyle color={'#6A6969'} size={16}>All rewards will be sent out within 5 Working Days after the end of the Competition. </TextStyle>
+                        <TextStyle color={'#24282B'} size={20}>{t('right_title1')}</TextStyle>
+                        <TextStyle color={'#6A6969'} size={16}>{t('right_1_text1')} </TextStyle>
                     </div>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>Section II - Trading Volume </TextStyle>
+                        <TextStyle color={'#24282B'} size={20}>{t('left_title2')}</TextStyle>
                         <TextStyle color={'#6A6969'} size={16}>
-                            Gold: 10,000,000 $CBDs<br />
-                            Silver: 5,000,000 $CBDs<br />
-                            Bronze: 3,000,000 $CBDs<br />
-                            Top 4-11: 1,000,000 $CBDs for each winner<br />
-                            Top 12-21: 600,000 $CBDs for each winner<br />
-                            Top 22-121: 180,000 $CBDs and 500 veMACAs for each winner
+                            {t('right_2_text1')}<br />
+                            {t('right_2_text2')}<br />
+                            {t('right_2_text3')}<br />
+                            {t('right_2_text4')}<br />
+                            {t('right_2_text5')}<br />
+                            {t('right_2_text6')}
                          </TextStyle> 
                     </div>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>Sunny Award:  </TextStyle>
+                        <TextStyle color={'#24282B'} size={20}>{t('left_title3')}</TextStyle>
                         <TextStyle color={'#6A6969'} size={16}>
-                            All participants who are not in the winner list above but traded a minimum amount of $100 AND hold at least 100 CBD tokens will split a Prize Pool of  50,000,000 CBD tokens!  Each Prize Pool Share is 10,000 CBD tokens, with a total number of 5000 winners!~  FCFS!
+                            {t('right_3_text1')}
                          </TextStyle> 
                     </div>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>How to Participate  </TextStyle>
+                        <TextStyle color={'#24282B'} size={20}>{t('left_title4')}</TextStyle>
                         <TextStyle color={'#6A6969'} size={16}>
-                            1. Log in: Ensure you're logged into Macaron.Connect wallet to Bitlayer Mainnet. <br />
-                            2. Trade: Engage in trading the CBD/BTC pair. <br />
-                            3. There is no minimum trading volume restriction.<br />
+                            {t('right_4_text1')}<br />
+                            {t('right_4_text2')}<br />
+                            {t('right_4_text3')}<br />
                          </TextStyle> 
                     </div>
                 </Content>
