@@ -228,8 +228,8 @@ function Home() {
     }
     useEffect(() => {
         const params = {
-            start_time: 17175024000000,
-            end_time: 17178047400000,
+            start_time: 1717502400000,
+            end_time: 1717804740000,
             limit: 70,
         }
         if(userAddress){
