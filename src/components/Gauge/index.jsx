@@ -6,25 +6,27 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 120px;
+  width: 84px; /* 修改容器的宽度为84px */
+  height: 84px; /* 修改容器的高度为84px */
   position: relative;
 `;
 
 const Svg = styled.svg`
   transform: rotate(-90deg);
+  width: 100%; /* 让SVG元素填充其父容器的宽度 */
+  height: 100%; /* 让SVG元素填充其父容器的高度 */
 `;
 
 const CircleBackground = styled.circle`
   fill: none;
   stroke: rgba(178, 197, 215, 0.40);
-  stroke-width: 17;
+  stroke-width: 10; /* 修改背景圆环的宽度为10 */
 `;
 
 const CircleProgress = styled.circle`
   fill: none;
   stroke: #6fd765;
-  stroke-width: 17;
+  stroke-width: 10; /* 修改进度圆环的宽度为10 */
   stroke-linecap: round;
   stroke-dasharray: ${(props) => props.dashArray};
   stroke-dashoffset: ${(props) => props.dashOffset};
@@ -47,25 +49,25 @@ const StatusText = styled.div`
 
 
 const Gauge = ({ percentage }) => {
-    const size = 120;
-    const radius = 50;
+    const size = '100%';
+    const radius = 37; /* 将半径修改为42 */
     const circumference = 2 * Math.PI * radius;
     const dashOffset = circumference * (1 - percentage / 100);
 
     return (
         <Container>
             <Svg width={size} height={size}>
-                <CircleBackground cx="60" cy="60" r={radius} />
+                <CircleBackground cx="42" cy="42" r={radius} />
                 <CircleProgress
-                  cx="60"
-                  cy="60"
+                  cx="42"
+                  cy="42"
                   r={radius}
                   dashArray={circumference}
                   dashOffset={dashOffset}
                 />
             </Svg>
             <StatusText>
-                <TextStyle color={'#24282B'} size={25} hsize={18}>{`${percentage.toFixed(2)}%`}</TextStyle>
+                <TextStyle color={'#24282B'} size={20} hsize={18}>{`${percentage.toFixed(2)}%`}</TextStyle>
                 <TextStyle color={'#24282B'} size={12}>当前进度</TextStyle>
             </StatusText>
         </Container>

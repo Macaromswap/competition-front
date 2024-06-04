@@ -174,17 +174,17 @@ const Tables = ({ data }) => {
                     <HeaderRow grid={3}>
                         <TableCol>
                             <IndexBox>
-                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>#</TextStyle>
+                                <TextStyle color={'#6A6969'} size={16} hsize={14} justify={'true'}>#</TextStyle>
                             </IndexBox>
                         </TableCol>
                         <TableCol>
-                            <Text color={'#24282B'} size={16} hsize={12} justify={'true'}>
-                                Wallet Address
+                            <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
+                                {t('wallet_address')}
                             </Text>
                         </TableCol>
                         <TableCol>
-                            <Text color={'#24282B'} size={16} hsize={12} justify={'true'}>
-                                Trading Volumes
+                            <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
+                                {t('tr_vol')}
                             </Text>
                         </TableCol>
                     </HeaderRow>

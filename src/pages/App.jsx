@@ -15,7 +15,7 @@ const PageWidth = styled.div`
   padding: 0 16px;
 `
 const Pages = styled.div`
-  padding: 60px 0 60px;
+  padding: 48px 0 60px;
   @media screen and (max-width: 860px) {
     padding: 40px 0 76px;
   }

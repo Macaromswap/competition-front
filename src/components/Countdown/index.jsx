@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { TextStyle } from '../../components/Text/TextCss'
+import { useTranslation } from 'react-i18next';
 
 const CountdownContainer = styled.div`
   display: flex;
@@ -35,27 +36,29 @@ const formatTime = (time) => {
 };
 
 const Countdown = ({ endDate }) => {
-  const calculateTimeLeft = () => {
-    const difference = new Date(endDate) - new Date();
-    let timeLeft = {};
-    if (difference > 0) {
-      timeLeft = {
-        days: formatTime(Math.floor(difference / (1000 * 60 * 60 * 24))),
-        hours: formatTime(Math.floor((difference / (1000 * 60 * 60)) % 24)),
-        minutes: formatTime(Math.floor((difference / 1000 / 60) % 60)),
-        seconds: formatTime(Math.floor((difference / 1000) % 60)),
-      };
-    } else {
-      timeLeft = {
-        days: '00',
-        hours: '00',
-        minutes: '00',
-        seconds: '00',
-      };
-    }
+    const { t, i18n } = useTranslation();
 
-    return timeLeft;
-  };
+    const calculateTimeLeft = () => {
+        const difference = new Date(endDate) - new Date();
+        let timeLeft = {};
+        if (difference > 0) {
+          timeLeft = {
+            days: formatTime(Math.floor(difference / (1000 * 60 * 60 * 24))),
+            hours: formatTime(Math.floor((difference / (1000 * 60 * 60)) % 24)),
+            minutes: formatTime(Math.floor((difference / 1000 / 60) % 60)),
+            seconds: formatTime(Math.floor((difference / 1000) % 60)),
+          };
+        } else {
+          timeLeft = {
+            days: '00',
+            hours: '00',
+            minutes: '00',
+            seconds: '00',
+          };
+        }
+
+        return timeLeft;
+    };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -75,7 +78,7 @@ const Countdown = ({ endDate }) => {
                 {timeLeft.days}
             </TextStyle>
         </DateBox>
-        <TextStyle color={'#000'} size={12}>Days</TextStyle>
+        <TextStyle color={'#000'} size={12}>{t('days')}</TextStyle>
       </TimeBox>
       <TimeBox>
         <DateBox>
@@ -83,7 +86,7 @@ const Countdown = ({ endDate }) => {
                 {timeLeft.hours}
             </TextStyle>
         </DateBox>
-        <TextStyle color={'#000'} size={12}>Hours</TextStyle>
+        <TextStyle color={'#000'} size={12}>{t('hours')}</TextStyle>
       </TimeBox>
       <TimeBox>
         <DateBox>
@@ -91,7 +94,7 @@ const Countdown = ({ endDate }) => {
                 {timeLeft.minutes}
             </TextStyle>
         </DateBox>
-        <TextStyle color={'#000'} size={12}>Minutes</TextStyle>
+        <TextStyle color={'#000'} size={12}>{t('minutes')}</TextStyle>
       </TimeBox>
       <TimeBox>
         <DateBox>
@@ -99,7 +102,7 @@ const Countdown = ({ endDate }) => {
                 {timeLeft.seconds}
             </TextStyle>
         </DateBox>
-        <TextStyle color={'#000'} size={12}>Seconds</TextStyle>
+        <TextStyle color={'#000'} size={12}>{t('seconds')}</TextStyle>
       </TimeBox>
     </CountdownContainer>
   );

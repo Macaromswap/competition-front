@@ -23,6 +23,14 @@ const ToggleItme = styled.div `
         border-radius: 10px;
         z-index: 9;
     }
+    @media screen and (max-width: 860px) {
+        display: none;
+    }
+`
+const ToggleItmeH5 = styled.div`
+    @media screen and (min-width: 860px) {
+        display: none;
+    }
 `
 const Toggle = styled.div `
     height: 34px;
@@ -44,8 +52,33 @@ const SearchImgStyle = styled.img`
     width: 34px;
     position: absolute;
     right: -10px;
-    top:2px;
+    top: -2px;
     z-index: 999;
+`
+const WalletmgStyle = styled.img`
+    width: 24px;
+    height: 24px;
+    margin-top: 5px;
+`
+const ToggleH5 = styled.div`
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+    gap: 6px;
+    border-radius: 9999px;
+    background: #FFEDAC;
+`
+const LeftImgBox = styled.div`
+    display: flex;
+    padding: 6px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    background: var(--Primary, #FFDB58);
+`
+const LeftImg = styled.img`
+    width: 18px;
+    height: 18px;
 `
 
 const Wallet = () => {
@@ -115,19 +148,34 @@ const Wallet = () => {
     }
 
     return (
-        <ToggleItme>
-            {
-                isConnected?
-                <Toggle onClick={connectWallet}>
-                    <TextStyle color={'#000'} size={16}>{shortenAddress(userAddress)}</TextStyle>
-                </Toggle>
-                :
-                <Toggle onClick={connectWallet}>
-                    <TextStyle color={'#000'} size={16}>{t('wallet')}</TextStyle>
-                </Toggle>
-            }
-           <SearchImgStyle src={wallet}/>
-       </ToggleItme>
+        <>
+            <ToggleItme>
+                {
+                    isConnected?
+                    <Toggle onClick={connectWallet}>
+                        <TextStyle color={'#24282B'} size={16}>{shortenAddress(userAddress)}</TextStyle>
+                    </Toggle>
+                    :
+                    <Toggle onClick={connectWallet}>
+                        <TextStyle color={'#24282B'} size={16}>{t('wallet')}</TextStyle>
+                    </Toggle>
+                }
+                <SearchImgStyle src={wallet}/>
+            </ToggleItme>
+            <ToggleItmeH5>
+                {
+                    isConnected?
+                    <ToggleH5 onClick={connectWallet}>
+                        <LeftImgBox>
+                            <LeftImg src={wallet}/>
+                        </LeftImgBox>
+                        <TextStyle color={'#24282B'} size={16}>{shortenAddress(userAddress)}</TextStyle>
+                    </ToggleH5>
+                    :
+                    <WalletmgStyle src={wallet} onClick={connectWallet}/>
+                }
+            </ToggleItmeH5>
+        </>
     );
 };
 
