@@ -67,7 +67,7 @@ const BackBtn = styled.div`
     box-shadow: 4px 4px 0px 0px #000;
     position: absolute;
     left: 50%;
-    bottom: 50px;
+    bottom: 100px;
     transform: translateX(-50%);
 `
 
@@ -107,7 +107,7 @@ function MenuPage({handleClick}) {
                 </NavList>
             </TopBox>
             <BackBtn onClick={handleClick}>
-                <TextStyle color={'#000'} size={20} spac={-1.7}>Back</TextStyle>
+                <TextStyle color={'#000'} size={20} spac={-1.7}>{t('back')}</TextStyle>
             </BackBtn>
         </MenuBar>
     )

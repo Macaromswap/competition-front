@@ -226,36 +226,40 @@ function Home() {
     const handleTabClick = (index) => {
         setActiveTab(index);
     }
+    const allList = (params) => {
+        getSwapRank(activeNetwork, params).then((res) => {
+            const {list, total, current} = res.data
+            setRankData(list)
+            const swaptotal = total || 0
+            setRankTotal(swaptotal)
+            if(current){
+                setRankCurrent(current)
+            }
+        })
+        getSwapTx(activeNetwork, params).then(res => {
+            const {list, total, current} = res.data
+            setTxData(list)
+            const txtotal = total || 0
+            const perc = txtotal / 100000 * 100
+            setPercent(perc)
+            setTxTotal(txtotal)
+            if(current){
+                setTxCurrent(current)
+            }
+        })
+    }
     useEffect(() => {
         const params = {
-            start_time: 17175024000000,
-            end_time: 17178047400000,
+            start_time: 1717502400000,
+            end_time: 1717804740000,
             limit: 70,
         }
         if(userAddress){
             params.wallet_address= userAddress
         }
+        allList(params)
         const timer = setInterval(() => {
-            getSwapRank(activeNetwork, params).then((res) => {
-                const {list, total, current} = res.data
-                setRankData(list)
-                const swaptotal = total || 0
-                setRankTotal(swaptotal)
-                if(current){
-                    setRankCurrent(current)
-                }
-            })
-            getSwapTx(activeNetwork, params).then(res => {
-                const {list, total, current} = res.data
-                setTxData(list)
-                const txtotal = total || 0
-                const perc = txtotal / 100000 * 100
-                setPercent(perc)
-                setTxTotal(txtotal)
-                if(current){
-                    setTxCurrent(current)
-                }
-            })
+            allList(params)
         }, 6000);
       
         return () => clearInterval(timer);
