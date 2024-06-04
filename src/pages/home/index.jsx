@@ -170,8 +170,9 @@ const FlexColumn = styled.div`
 const FlexVolume = styled.div`
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     @media screen and (max-width: 690px) {
+        align-items: flex-start;
+        flex-direction: column;
         img {
             display: none;
         }
@@ -208,7 +209,7 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-6-8 7:59:00'
+    const targetDate = '2024-06-08 07:59:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
@@ -220,8 +221,8 @@ function Home() {
         }
     }, [lang])
     const tabItems = [
-        { label: t('Number of Transactions'), index: 1 },
-        { label: t('Trading Volumes'), index: 2 },
+        { label: t('trans_number'), index: 1 },
+        { label: t('tr_vol'), index: 2 },
     ]
     const handleTabClick = (index) => {
         setActiveTab(index);
