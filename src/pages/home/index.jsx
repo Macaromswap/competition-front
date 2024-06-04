@@ -170,8 +170,9 @@ const FlexColumn = styled.div`
 const FlexVolume = styled.div`
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     @media screen and (max-width: 690px) {
+        align-items: flex-start;
+        flex-direction: column;
         img {
             display: none;
         }
