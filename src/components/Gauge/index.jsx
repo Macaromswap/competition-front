@@ -69,7 +69,7 @@ const Gauge = ({ percentage }) => {
                 />
             </Svg>
             <StatusText>
-                <TextStyle color={'#24282B'} size={20} hsize={18}>{`${percentage.toFixed(2)}%`}</TextStyle>
+                <TextStyle color={'#24282B'} size={20} hsize={18}>{percentage >=100 ?`100%`:`${percentage.toFixed(2)}%`}</TextStyle>
                 <TextStyle color={'#24282B'} size={12}>{t('progress')}</TextStyle>
             </StatusText>
         </Container>

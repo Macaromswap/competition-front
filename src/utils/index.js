@@ -82,6 +82,7 @@ const links = {
     'brandKit': 'https://github.com/Macaromswap/BrandKit',
     'ecosystem': 'https://www.macaron.biz/#/ecosystem?lang=en',
     'token': 'https://info.macaron.biz/#/tokens',
+    'tgLink': 'https://t.me/Macaron_Riders'
 }
 
 export function goLink(text) {
