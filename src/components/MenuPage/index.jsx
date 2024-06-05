@@ -95,14 +95,17 @@ function MenuPage({handleClick}) {
                     <StyledNavLink onClick={() => selectChange('/airdrop')}>
                         <TextStyle color={'#0b0f17'} size={20}>{t('airdrop')}</TextStyle>
                     </StyledNavLink>
-                    <StyledNavLink className={'active'} onClick={handleClick}>
-                        <TextStyle color={'#fff'} size={20}>{t('leaderboard')}</TextStyle>
+                    <StyledNavLink onClick={() => selectChange('/leaderboard')}>
+                        <TextStyle color={'#0b0f17'} size={20}>{t('leaderboard')}</TextStyle>
                     </StyledNavLink>
                     <StyledNavLink onClick={toInfo}>
                         <TextStyle color={'#0b0f17'} size={20}>{t('analytics')}</TextStyle>
                     </StyledNavLink>
                     <StyledNavLink onClick={() => selectChange('/ecosystem')}>
                         <TextStyle color={'#0b0f17'} size={20}>{t('ecosystem')}</TextStyle>
+                    </StyledNavLink>
+                    <StyledNavLink className={'active'} onClick={handleClick}>
+                        <TextStyle color={'#fff'} size={20}>{t('competition')}</TextStyle>
                     </StyledNavLink>
                 </NavList>
             </TopBox>

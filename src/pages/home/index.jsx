@@ -14,13 +14,14 @@ import { ReactComponent as RightimgIcon } from '../../assets/img/right.svg'
 import { ReactComponent as ImgIcon } from '../../assets/img/group.svg'
 import staricon from "../../assets/img/staricon.png";
 import question from "../../assets/img/question.png";
+import telegram from "../../assets/img/telegram.png";
 import { formattedNumber } from "../../utils/numbers.js";
 import LeftTooltip from "../../components/LeftTooltip";
 import RightTooltip from "../../components/RightTooltip";
 import Gauge from "../../components/Gauge";
 import PopUp from "../../components/PopUp";
 import Countdown from "../../components/Countdown";
-import { toMacaronRoute } from "../../utils";
+import { toMacaronRoute, goLink } from "../../utils";
 
 const Wrapper = styled.div`
 `
@@ -196,6 +197,20 @@ const Image = styled.img`
         display: block;
     }
 `;
+const BtnTg = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @media screen and (max-width: 690px) {
+        gap: 12px;
+    }
+`
+const TgImg = styled.img`
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    border-radius: 50px;
+`
 
 function Home() {
     const { lang } = useParams();
@@ -292,9 +307,12 @@ function Home() {
             </Title>
             <BtnStyleH5>
                 <Countdown endDate={targetDate} />
-                <SwapNow onClick={toSwapNow}>
-                    <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
-                </SwapNow>
+                <BtnTg>
+                    <SwapNow onClick={toSwapNow}>
+                        <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
+                    </SwapNow>
+                    <TgImg src={telegram} onClick={() => goLink('tgLink')} />
+                </BtnTg>
                 <Rules onClick={() => openModal(1)}>
                     <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
                 </Rules>
@@ -303,9 +321,12 @@ function Home() {
                 <LeftimgIcon />
                 <BtnStyle>
                     <Countdown endDate={targetDate} />
-                    <SwapNow onClick={toSwapNow}>
-                        <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
-                    </SwapNow>
+                    <BtnTg>
+                        <SwapNow onClick={toSwapNow}>
+                            <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
+                        </SwapNow>
+                        <TgImg src={telegram} onClick={() => goLink('tgLink')} />
+                    </BtnTg>
                     <Rules onClick={() => openModal(1)}>
                         <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
                     </Rules>
