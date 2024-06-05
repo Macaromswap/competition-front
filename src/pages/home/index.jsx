@@ -213,7 +213,6 @@ const TgImg = styled.img`
 `
 
 function Home() {
-    const { lang } = useParams();
     const { t, i18n } = useTranslation();
     const { activeNetwork, userAddress } = useNetworkStore()
     const [rankData, setRankData] = useState([])
@@ -228,13 +227,6 @@ function Home() {
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
-    useEffect(() => {
-        const lng = ['en', 'ja', 'vi', 'zh-CN', 'zh-HK']
-        console.log(lang, lng[lang])
-        if(lng[lang]) {
-          i18n.changeLanguage(lang)
-        }
-    }, [lang])
     const tabItems = [
         { label: t('trans_number'), index: 1 },
         { label: t('tr_vol'), index: 2 },
@@ -248,9 +240,7 @@ function Home() {
             setRankData(list)
             const swaptotal = total || 0
             setRankTotal(swaptotal)
-            if(current){
-                setRankCurrent(current)
-            }
+            setRankCurrent(current)
         })
         getSwapTx(activeNetwork, params).then(res => {
             const {list, total, current} = res.data
@@ -259,9 +249,7 @@ function Home() {
             const perc = txtotal / 100000 * 100
             setPercent(perc)
             setTxTotal(txtotal)
-            if(current){
-                setTxCurrent(current)
-            }
+            setTxCurrent(current)
         })
     }
     useEffect(() => {
