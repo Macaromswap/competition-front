@@ -144,6 +144,7 @@ const PopupComponent = ({open, closeModal, type}) => {
                                 </div>
                                 <div>
                                     <TextStyle color={'#24282B'} size={20}>{t('rules_title2')}</TextStyle>
+                                    <TextStyle color={'#6A6969'} size={16}>{t('left_1_text2')}</TextStyle>
                                     <TextStyle color={'#6A6969'} size={16}>{t('rules_2_text1')}</TextStyle> 
                                 </div>
                                 <div>

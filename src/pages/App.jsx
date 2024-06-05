@@ -46,7 +46,7 @@ function App() {
           <Menu></Menu>
           <Pages>
             <Routes>
-              <Route path="/leaderboard" element={<Home />} />
+              <Route path="/competition" element={<Home />} />
               <Route path="/" element={<Home />}/>
             </Routes>
           </Pages>
