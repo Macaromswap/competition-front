@@ -263,7 +263,11 @@ function Home() {
         }
         allList(params)
         const timer = setInterval(() => {
-            allList(params)
+            if (params.end_time > Date.now()) {
+                allList(params)
+            } else{
+                clearInterval(timer)
+            }
         }, 6000);
     
         return () => clearInterval(timer);
@@ -347,7 +351,7 @@ function Home() {
                             </FlexVolume>
                         </FlexColumn>
                     </AnalysisBox>
-                    <TableTxRank data={txData}></TableTxRank>
+                    <TableTxRank data={txData} meData={txCurrent}></TableTxRank>
                 </LeftTable>
                 <RightTable className={activeTab === 2? 'open':'close'}>
                     <FelxTextStyle>
@@ -369,7 +373,7 @@ function Home() {
                             </FlexVolume>
                         </FlexColumn>
                     </AnalysisBox>
-                    <TableRank data={rankData}></TableRank>
+                    <TableRank data={rankData} meData={rankCurrent}></TableRank>
                 </RightTable>
             </TableBox>
         </Wrapper>

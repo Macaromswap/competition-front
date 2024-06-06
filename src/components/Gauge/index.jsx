@@ -54,7 +54,7 @@ const Gauge = ({ percentage }) => {
     const size = '100%';
     const radius = 37; /* 将半径修改为42 */
     const circumference = 2 * Math.PI * radius;
-    const dashOffset = circumference * (1 - percentage / 100);
+    const dashOffset = circumference * (1 - percentage / 104);
 
     return (
         <Container>
