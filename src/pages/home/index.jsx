@@ -256,7 +256,7 @@ function Home() {
         const params = {
             start_time: 1717502400000,
             end_time: 1717804740000,
-            limit: 70,
+            limit: 200,
         }
         if(userAddress){
             params.wallet_address= userAddress
@@ -265,7 +265,7 @@ function Home() {
         const timer = setInterval(() => {
             allList(params)
         }, 6000);
-      
+    
         return () => clearInterval(timer);
     }, [userAddress]);
     const openModal = (type) => {

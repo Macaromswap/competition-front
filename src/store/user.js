@@ -9,7 +9,7 @@ const useUserStore = create((set, get) => ({
     updateAllList: async(chainId) => {
         set({ updateList: false });
         const [rank, latest] = await Promise.all([
-            getSwapRank(chainId, { start_time: 1716134400000, end_time: 1716912000000, limit: 70 }),
+            getSwapRank(chainId, { start_time: 1716134400000, end_time: 1716912000000, limit: 200 }),
             getSwapTx(chainId),
         ]);
         console.log(rank, latest);
