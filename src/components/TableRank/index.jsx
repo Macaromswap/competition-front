@@ -9,6 +9,7 @@ import { useNetworkStore } from "../../store";
 import { formatTime } from "../../utils/date";
 import { formattedNumber } from "../../utils/numbers";
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as ImgMeIcon } from '../../assets/img/me.svg'
 
 const RowColumns = styled.div`
     height: 72px;
@@ -22,7 +23,7 @@ const RowColumns = styled.div`
     display: grid;
     align-items: center;
     gap: 10px;
-    grid-template-columns: 60px repeat(2, 1fr);
+    grid-template-columns: 80px repeat(2, 1fr);
     @media screen and (max-width: 1000px) {
         height:100%;
         padding: 14px 20px;
@@ -44,6 +45,27 @@ const TableRow = styled(RowColumns)`
     @media screen and (max-width: 1000px) {
         margin-top: 0;
         border-top: 1px solid #F2F2F2;
+    }
+`
+const MeTableRow = styled(RowColumns)`
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #FEFFC7;
+    @media screen and (max-width: 1000px) {
+        margin-top: 0;
+        border-top: 1px solid #F2F2F2;
+    }
+`
+const ImgMe = styled(ImgMeIcon)`
+    z-index: 999;
+    position: absolute;
+    left: -22px;
+    top: -10px;
+    @media screen and (max-width: 690px) {
+        width: 22.34px;
+        height: 16px;
+        left: -10px;
+        top: 18px;
     }
 `
 const TableCol = styled.div`
@@ -140,7 +162,7 @@ const Trophy = ({ src }) => {
     );
 };
 
-const Tables = ({ data }) => {
+const Tables = ({ data, meData }) => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { activeNetwork } = useNetworkStore()
@@ -189,6 +211,30 @@ const Tables = ({ data }) => {
                         </TableCol>
                     </HeaderRow>
                 </RowShadow>
+                {
+                    meData?.index && 
+                    <RowShadow>
+                        <MeTableRow>
+                            <TableCol>
+                                {
+                                    meData.index < 4?
+                                    <Trophy src={`trophy${meData.index}`} />
+                                    :
+                                    <IndexBox>
+                                        <TextStyle color={'#24282B'} size={36} hsize={14}>{meData.index}</TextStyle>
+                                    </IndexBox>
+                                }
+                            </TableCol>
+                            <TableCol>
+                                <Ellipsis color={'#24282B'} size={16} hsize={14} justify={'true'}>{shortenAddress(meData.creator)}</Ellipsis>
+                            </TableCol>
+                            <TableCol>
+                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>$ {formattedNumber(meData.swap_amount)}</TextStyle>
+                            </TableCol>
+                        </MeTableRow>
+                        <ImgMe />
+                    </RowShadow>
+                }
                 { sortedData.length? sortedData.map((row, index) => (
                     <RowShadow>
                         <TableRow grid={3} key={row.index}>

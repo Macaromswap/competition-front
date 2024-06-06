@@ -351,7 +351,7 @@ function Home() {
                             </FlexVolume>
                         </FlexColumn>
                     </AnalysisBox>
-                    <TableTxRank data={txData}></TableTxRank>
+                    <TableTxRank data={txData} meData={txCurrent}></TableTxRank>
                 </LeftTable>
                 <RightTable className={activeTab === 2? 'open':'close'}>
                     <FelxTextStyle>
@@ -373,7 +373,7 @@ function Home() {
                             </FlexVolume>
                         </FlexColumn>
                     </AnalysisBox>
-                    <TableRank data={rankData}></TableRank>
+                    <TableRank data={rankData} meData={rankCurrent}></TableRank>
                 </RightTable>
             </TableBox>
         </Wrapper>
