@@ -22,7 +22,7 @@ const RowColumns = styled.div`
     display: grid;
     align-items: center;
     gap: 10px;
-    grid-template-columns: 60px repeat(2, 1fr);
+    grid-template-columns: 80px repeat(2, 1fr);
     @media screen and (max-width: 1000px) {
         height:100%;
         padding: 14px 20px;
