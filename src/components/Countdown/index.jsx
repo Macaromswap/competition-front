@@ -64,7 +64,13 @@ const Countdown = ({ endDate }) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      const newTimeLeft = calculateTimeLeft();
+      setTimeLeft(newTimeLeft);
+      
+      if (newTimeLeft.days === '00' && newTimeLeft.hours === '00' && 
+          newTimeLeft.minutes === '00' && newTimeLeft.seconds === '00') {
+          clearInterval(timer);
+      }
     }, 1000);
 
     return () => clearInterval(timer);

@@ -263,7 +263,11 @@ function Home() {
         }
         allList(params)
         const timer = setInterval(() => {
-            allList(params)
+            if (params.end_time > Date.now()) {
+                allList(params)
+            } else{
+                clearInterval(timer)
+            }
         }, 6000);
       
         return () => clearInterval(timer);
