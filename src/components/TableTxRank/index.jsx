@@ -73,15 +73,16 @@ const TableCol = styled.div`
     align-items: center;
     gap: 10px;
     justify-content: center;
-    overflow: hidden;
+    // overflow: hidden;
     &:nth-child(1) {
-        justify-content: flex-start;
+        justify-content: center;
     }
     &:nth-child(2) {
         justify-content: flex-start;
     }
     &:nth-child(3) {
         justify-content: flex-end;
+        text-wrap: nowrap;
     }
 `
 const RowShadow = styled.div `
@@ -221,7 +222,7 @@ const Tables = ({ data, meData }) => {
                                     <Trophy src={`trophy${meData.index}`} />
                                     :
                                     <IndexBox>
-                                        <TextStyle color={'#24282B'} size={36} hsize={14}>{meData.index}</TextStyle>
+                                        <TextStyle color={'#24282B'} size={30} hsize={14}>{meData.index}</TextStyle>
                                     </IndexBox>
                                 }
                             </TableCol>
@@ -244,7 +245,7 @@ const Tables = ({ data, meData }) => {
                                     <Trophy src={`trophy${row.index}`} />
                                     :
                                     <IndexBox>
-                                        <TextStyle color={'#24282B'} size={36} hsize={14}>{row.index}</TextStyle>
+                                        <TextStyle color={'#24282B'} size={30} hsize={14}>{row.index}</TextStyle>
                                     </IndexBox>
                                 }
                             </TableCol>
