@@ -223,7 +223,7 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-06-08 07:59:00'
+    const targetDate = '2024-06-08 19:59:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
@@ -255,7 +255,7 @@ function Home() {
     useEffect(() => {
         const params = {
             start_time: 1717502400000,
-            end_time: 1717804740000,
+            end_time: 1717847940000,
             limit: 200,
         }
         if(userAddress){
