@@ -160,7 +160,7 @@ const PopupComponent = ({open, closeModal, type}) => {
                                      </TextStyle> 
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('sat_right_title')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('sat_rules_title3')}</TextStyle>
                                 </div>
                                 <div>
                                     <UlBox>
