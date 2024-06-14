@@ -27,6 +27,10 @@ code {
     color: #FFC800;
 }
 
+.yellow2 {
+    color: #FFC800;
+}
+
 .scrollbar ::-webkit-scrollbar {
     width: 6px;
     border-radius: 26px;
@@ -43,4 +47,8 @@ code {
 .scrollbar ::-webkit-scrollbar-thumb {
     background: #000;
     border-radius: 26px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
 }

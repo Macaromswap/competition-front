@@ -12,6 +12,11 @@ import MenuPage from "../MenuPage";
 import LanuagePage from "../LanuagePage";
 import { useTranslation } from 'react-i18next';
 import Wallet from "../Wallet";
+import fireimgIcon from '../../assets/img/fire.png'
+import menuBox from '../../assets/img/menuBox.png'
+import lorenzo from '../../assets/img/lorenzo.png'
+import satoshi from '../../assets/img/satoshi.png'
+import cbd from '../../assets/img/cbd.png'
 
 const Wrapper = styled.div`
     display: flex;
@@ -93,7 +98,7 @@ const MiniMenu = styled.div`
 const StyledNavLink = styled.div`
     cursor: pointer;
     text-align: center;
-    min-width: 118px;
+    min-width: 114px;
     height: 100%;
     padding: 0 20px;
     line-height: 24px;
@@ -101,14 +106,17 @@ const StyledNavLink = styled.div`
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    position: relative;
+    z-index: 99;
     &.active {
-          color: #fff;
-          background: #000;
-          transform: skewX(-15deg);
-          div {
-              transform: skewX(15deg);;
-          }
+        color: #fff;
+        background: #000;
+        transform: skewX(-15deg);
+        span {
+            transform: skewX(15deg);
+        }
     }
+   
 `
 const H5menu = styled.div`
     cursor: pointer;
@@ -124,7 +132,7 @@ const SearchStyle = styled.div`
     display: flex;
     padding: 8px 16px;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     border-radius: 9999px;
     @media screen and (max-width: 860px) {
         display: none !important;
@@ -152,14 +160,14 @@ const LanuageImgStyle = styled.img`
 const FloatingBox = styled.div`
     position: absolute;
     top: 62px;
-    left: -140px;
+    left: -124px;
     width: 189px;
     height: 292px;
     padding: 43px 0px 0px 30px;
     background-image: url(${dialog});
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    z-index: 9999;
+    z-index: 99;
     box-sizing: border-box;
 `
 const UlBox = styled.ul`
@@ -190,15 +198,83 @@ const MenuImg = styled.img`
     width: 24px;
     height: 24px;
 `
+const FireimgIcon = styled.img`
+    width: 24px;
+    height: 24px;
+    transform: skewX(15deg);
+`
+
+const CompetitionMenu = styled.div`
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 178px;
+    height: 144px;
+    padding: 43px 0px 0px 30px;
+    background-image: url(${menuBox});
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 99;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    transform: skewX(15deg);
+`
+const IconBox = styled.div`
+    display: flex;
+    width: 28px;
+    height: 28px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    border: 1px solid var(--Black, #24282B);
+    background: var(--White, #FFF);
+    box-shadow: 2px 2px 0px 0px #000;
+`
+const LogoIcon = styled.img`
+    width: 100%;
+    height: 100%;
+`
+const activeclassname = 'active'
+const RouterNavLink = styled(NavLink).attrs({
+    activeclassname,
+})`
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 20.64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 16px;
+    &.${activeclassname} {
+          div {
+            color: #FFCC14;
+          }
+    }
+    &:hover {
+        span {
+            color: #FFCC14;
+        }
+    }
+`
 
 function Menu() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
+    const [showCompt, setShowCompt] = useState(false);
     const [showH5, setShowH5] = useState(false);
     const btnRef = useRef(null)
     const ref = useRef(null)
+    const btnRefCompt = useRef(null)
+    const refCompt = useRef(null)
     const lang = [
         {label: 'EN', value: 'English', lang: 'en' },
         {label: 'CN', value: '简体中文', lang: 'zh-CN' },
@@ -210,7 +286,9 @@ function Menu() {
         i18n.changeLanguage(lng)
         setShow(false)
     }
-
+    const showComptMenu = () => {
+        setShowCompt(!showCompt)
+    }
     const toggleDropdown = () => {
       setIsOpen(!isOpen);
     };
@@ -223,6 +301,9 @@ function Menu() {
     const handleClick = (e: any) => {
         if (!(btnRef.current && btnRef.current.contains(e.target)) && !(ref.current && ref.current.contains(e.target))) {
             setShow(false)
+        }
+        if (!(btnRefCompt.current && btnRefCompt.current.contains(e.target)) && !(refCompt.current && refCompt.current.contains(e.target))) {
+            setShowCompt(false)
         }
     }
 
@@ -240,7 +321,6 @@ function Menu() {
     const toInfo = () => {
         toMacaronInfo('/')
     }
-
     return(
         <Wrapper>
             <LeftMenuBox>
@@ -266,8 +346,31 @@ function Menu() {
                     <StyledNavLink onClick={() => selectChange('/ecosystem')}>
                         <TextStyle color={'#0b0f17'} size={16}>{t('ecosystem')}</TextStyle>
                     </StyledNavLink>
-                    <StyledNavLink className={'active'} onClick={handleClick}>
-                        <TextStyle color={'#fff'} size={16}>{t('competition')}</TextStyle>
+                    <StyledNavLink className={'active'}  ref={btnRefCompt} onClick={showComptMenu}>
+                        <FireimgIcon src={fireimgIcon} />
+                        <span>
+                            <TextStyle color={'#fff'} size={16}>{t('competition')}</TextStyle>
+                        </span>
+                        {showCompt && <CompetitionMenu ref={refCompt}>
+                            <RouterNavLink to='/satoshi'>
+                                <IconBox>
+                                    <LogoIcon src={satoshi} />
+                                </IconBox>
+                                <TextStyle color={'#24282B'} size={16}><span>Satoshi</span></TextStyle>
+                            </RouterNavLink>
+                            <RouterNavLink to='/cbd'>
+                                <IconBox>
+                                    <LogoIcon src={cbd} />
+                                </IconBox>
+                                <TextStyle color={'#24282B'} size={16}><span>CBD</span></TextStyle>
+                            </RouterNavLink>
+                            {/* <ComptMenu onClick={() => navigate('/lorenzo')}>
+                                <IconBox>
+                                    <LogoIcon src={lorenzo} />
+                                </IconBox>
+                                <TextStyle color={'#24282B'} size={16}><span>Lorenzo</span></TextStyle>
+                            </ComptMenu> */}
+                        </CompetitionMenu>}
                     </StyledNavLink>
                 </Gap>
             </LeftMenuBox>

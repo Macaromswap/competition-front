@@ -58,7 +58,7 @@ const hostNameInfo = () => {
 export function toMacaronRoute(route) {
     const tradeURL = hostName()
     const link = `${tradeURL}/#${route}`
-    window.open(link, '_self')
+    window.open(link, '_blank')
 }
 
 export function toMacaronInfo(route) {

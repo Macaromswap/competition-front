@@ -3,58 +3,54 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { usePoolStore, useNetworkStore } from "../store";
 import styled from 'styled-components'
-import Home from './home'
+import CBD from './cbd'
+import Lorenzo from './lorenzo'
+import Satoshi from './satoshi'
 import Menu from '../components/Menu'
 import PageBottom from "../components/PageBottom";
 import { useTranslation } from 'react-i18next';
 
 const PageWidth = styled.div`
-  max-width: 1200px;
-  // height: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
+  	max-width: 1200px;
+  	// height: 100%;
+  	margin: 0 auto;
+  	padding: 0 16px;
 `
 const Pages = styled.div`
-  padding: 48px 0 60px;
-  @media screen and (max-width: 860px) {
-    padding: 40px 0 76px;
-  }
+  	padding: 48px 0 60px;
+  	@media screen and (max-width: 860px) {
+  	  	padding: 40px 0 76px;
+  	}
 `
 function App() {
-  const { i18n } = useTranslation();
-  const { activeNetwork } = useNetworkStore()
-  const { updateAllList } = usePoolStore()
+  	const { i18n } = useTranslation();
+  	const { activeNetwork } = useNetworkStore()
+  	const { updateAllList } = usePoolStore()
 
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const lang = params.get('lang');
-  useEffect(() => {
-    const lng = ['en', 'ja', 'vi', 'zh-CN', 'zh-HK']
-    if(lng.includes(lang)) {
-      i18n.changeLanguage(lang)
-    }
-  }, [lang])
+  	const location = useLocation();
+  	const params = new URLSearchParams(location.search);
+  	const lang = params.get('lang');
+  	useEffect(() => {
+  	  	const lng = ['en', 'ja', 'vi', 'zh-CN', 'zh-HK']
+  	  	if(lng.includes(lang)) {
+  	  	  	i18n.changeLanguage(lang)
+  	  	}
+  	}, [lang])
 
-  // useEffect(() => {
-  //   updateAllList(activeNetwork)
-  // }, [activeNetwork])
+  	// useEffect(() => {
+  	//   updateAllList(activeNetwork)
+  	// }, [activeNetwork])
 
-  return (
-    <div className="App">
-      <PageWidth>
-        <>
-          <Menu></Menu>
-          <Pages>
-            <Routes>
-              <Route path="/competition" element={<Home />} />
-              <Route path="/" element={<Home />}/>
-            </Routes>
-          </Pages>
-        </>
-      </PageWidth>
-      <PageBottom />
-    </div>
-  );
+  	return (
+    	<div className="App">
+    	    <Routes>
+    	      	<Route path="/" element={<Satoshi />} />
+    	      	<Route path="/satoshi" element={<Satoshi />} />
+    	      	<Route path="/cbd" element={<CBD />}/>
+    	      	{/* <Route path="/lorenzo" element={<Lorenzo />} /> */}
+    	    </Routes>
+    	</div>
+  	);
 }
 
 export default App;

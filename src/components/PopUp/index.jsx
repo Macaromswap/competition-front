@@ -102,7 +102,7 @@ const CloseImgStyle = styled.img`
     }
 `
 const UlBox = styled.ul`
-    padding: 0 30px;
+    padding-left: 30px;
     margin:0;
     list-style-color: #6A6969;
     font-size: 14px;

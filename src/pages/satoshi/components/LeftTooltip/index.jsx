@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import question from "../../assets/img/question.png";
-import { ReactComponent as ImgIcon } from '../../assets/img/sanjx.svg'
-import { TextStyle } from '../../components/Text/TextCss'
+import question from "../../../../assets/img/question.png";
+import { ReactComponent as ImgIcon } from '../../../../assets/img/sanjx.svg'
+import { TextStyle } from '../../../../components/Text/TextCss'
 import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
@@ -72,32 +72,24 @@ const LeftTooltip = () => {
                 <SanjxImg />
                 <Content>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>{t('left_title1')}</TextStyle>
+                        <TextStyle color={'#24282B'} size={20}>{t('sat_left_title')}</TextStyle>
                         <UlBox>
                             <li>
-                                <TextStyle color={'#6A6969'} size={16}>{t('left_1_text1')}</TextStyle> 
+                                <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text1')}</TextStyle> 
                             </li>
                             <li>
-                                <TextStyle color={'#6A6969'} size={16}>{t('left_1_text2')}</TextStyle> 
+                                <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text2')}</TextStyle> 
                             </li>
                         </UlBox>
                     </div>
                     <div>
-                        <TextStyle color={'#24282B'} size={20}>{t('left_title2')}</TextStyle>
                         <TextStyle color={'#6A6969'} size={16}>
-                            {t('left_2_text1')}<br />
-                            {t('left_2_text2')}<br />
-                            {t('left_2_text3')}<br />
-                            {t('left_2_text4')}<br />
-                            {t('left_2_text5')}
-                         </TextStyle> 
-                    </div>
-                    <div>
-                        <TextStyle color={'#24282B'} size={20}>{t('left_title3')}</TextStyle>
-                        <TextStyle color={'#6A6969'} size={16}>
-                        {t('left_3_text1')}<br />
-                        {t('left_3_text2')}<br />
-                        {t('left_3_text3')}
+                            {t('sat_left_text3')}<br />
+                            {t('sat_left_text4')}<br />
+                            {t('sat_left_text5')}<br />
+                            {t('sat_left_text6')}<br />
+                            {t('sat_left_text7')}<br />
+                            {t('sat_left_text8')}
                          </TextStyle> 
                     </div>
                 </Content>

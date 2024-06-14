@@ -6,12 +6,12 @@ import { useTranslation } from 'react-i18next';
 const CountdownContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 14px;
 `;
 
 const TimeBox = styled.div`
-  margin: 0 10px;
+  margin: 0 5px;
   text-align: center;
 `;
 const DateBox = styled.div`
@@ -87,6 +87,9 @@ const Countdown = ({ endDate }) => {
         <TextStyle color={'#000'} size={12}>{t('days')}</TextStyle>
       </TimeBox>
       <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
+      </TimeBox>
+      <TimeBox>
         <DateBox>
             <TextStyle color={'#FEFEFE'} size={30} hsize={24}>
                 {timeLeft.hours}
@@ -95,12 +98,18 @@ const Countdown = ({ endDate }) => {
         <TextStyle color={'#000'} size={12}>{t('hours')}</TextStyle>
       </TimeBox>
       <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
+      </TimeBox>
+      <TimeBox>
         <DateBox>
             <TextStyle color={'#FEFEFE'} size={30} hsize={24}>
                 {timeLeft.minutes}
             </TextStyle>
         </DateBox>
         <TextStyle color={'#000'} size={12}>{t('minutes')}</TextStyle>
+      </TimeBox>
+      <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
       </TimeBox>
       <TimeBox>
         <DateBox>

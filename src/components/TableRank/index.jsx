@@ -162,7 +162,7 @@ const Trophy = ({ src }) => {
     );
 };
 
-const Tables = ({ data, meData }) => {
+const Tables = ({ data, meData, volName }) => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { activeNetwork } = useNetworkStore()
@@ -206,7 +206,7 @@ const Tables = ({ data, meData }) => {
                         </TableCol>
                         <TableCol>
                             <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
-                                {t('tr_vol')}
+                                {volName === 'tvl_added'? t('tvl_added'): t('tr_vol') }
                             </Text>
                         </TableCol>
                     </HeaderRow>
