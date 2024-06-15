@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 const Container = styled.div`
     position: relative;
     display: inline-block;
+    z-index: 999;
     @media screen and (max-width: 690px) {
         display: none;
     }

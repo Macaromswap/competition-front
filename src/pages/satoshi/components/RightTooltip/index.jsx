@@ -95,10 +95,10 @@ const RightTooltip = () => {
                         </div>
                         <div>
                             <TextStyle color={'#6A6969'} size={16}>
+                                {t('sat_right_text5')}<br />
                                 {t('sat_right_text6')}<br />
                                 {t('sat_right_text7')}<br />
                                 {t('sat_right_text8')}<br />
-                                {t('sat_right_text9')}
                              </TextStyle> 
                         </div>
                     </Content>

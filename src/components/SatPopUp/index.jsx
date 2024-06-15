@@ -141,12 +141,12 @@ const PopupComponent = ({open, closeModal, type}) => {
                                     </UlBox>
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('sat_rules_title2')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('sat_left_title')}</TextStyle>
                                 </div>
                                 <div>
                                     <UlBox>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text4')} </TextStyle></li>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text5')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_left_text1')} </TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_left_text2')}</TextStyle></li>
                                     </UlBox>
                                 </div>
                                 <div>
@@ -160,22 +160,22 @@ const PopupComponent = ({open, closeModal, type}) => {
                                      </TextStyle> 
                                 </div>
                                 <div>
-                                    <TextStyle color={'#24282B'} size={20}>{t('sat_rules_title3')}</TextStyle>
+                                    <TextStyle color={'#24282B'} size={20}>{t('sat_right_title')}</TextStyle>
                                 </div>
                                 <div>
                                     <UlBox>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text6')} </TextStyle></li>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text7')}</TextStyle></li>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text8')}</TextStyle></li>
-                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_text9')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text1')} </TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text2')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text3')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4')}</TextStyle></li>
                                     </UlBox>
                                 </div>
                                 <div>
                                     <TextStyle color={'#6A6969'} size={16}>
+                                        {t('sat_right_text5')}<br />
                                         {t('sat_right_text6')}<br />
                                         {t('sat_right_text7')}<br />
-                                        {t('sat_right_text8')}<br />
-                                        {t('sat_right_text9')}
+                                        {t('sat_right_text8')}
                                      </TextStyle> 
                                 </div>
                             </Content>
@@ -186,26 +186,25 @@ const PopupComponent = ({open, closeModal, type}) => {
                             <Content>
                                 <div>
                                     <TextStyle color={'#24282B'} size={20}>{t('sat_left_title')}</TextStyle>
-                                    <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text1')}</TextStyle> 
                                 </div>
                                 <div>
                                     <UlBox>
                                         <li>
-                                            <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text2')}</TextStyle> 
+                                            <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text1')}</TextStyle> 
                                         </li>
                                         <li>
-                                            <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text3')}</TextStyle> 
+                                            <TextStyle color={'#6A6969'} size={16}>{t('sat_left_text2')}</TextStyle> 
                                         </li>
                                     </UlBox>
                                 </div>
                                 <div>
                                     <TextStyle color={'#6A6969'} size={16}>
+                                        {t('sat_left_text3')}<br />
                                         {t('sat_left_text4')}<br />
                                         {t('sat_left_text5')}<br />
                                         {t('sat_left_text6')}<br />
                                         {t('sat_left_text7')}<br />
-                                        {t('sat_left_text8')}<br />
-                                        {t('sat_left_text9')}
+                                        {t('sat_left_text8')}
                                     </TextStyle> 
                                 </div>
                             </Content>
@@ -233,10 +232,10 @@ const PopupComponent = ({open, closeModal, type}) => {
                                 </div>
                                 <div>
                                     <TextStyle color={'#6A6969'} size={16}>
+                                        {t('sat_right_text5')}<br />
                                         {t('sat_right_text6')}<br />
                                         {t('sat_right_text7')}<br />
-                                        {t('sat_right_text8')}<br />
-                                        {t('sat_right_text9')}<br />
+                                        {t('sat_right_text8')}
                                      </TextStyle> 
                                 </div>
                             </Content>

@@ -21,3 +21,10 @@ export const getSwapTx = (chainId, params) => {
         params
     })
 }
+export const getTvlRank = (chainId, params) => {
+    return request({
+        url: `/pair/${chainId}/tvl/rank`,
+        method: 'get',
+        params
+    })
+}

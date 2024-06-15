@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import TableRank from "../../components/TableRank";
 import TableTxRank from "../../components/TableTxRank";
 import Tabs from "../../components/Tabs";
-import { getSwapRank, getSwapTx } from "../../api";
+import { getSwapTx, getTvlRank } from "../../api";
 import { useNetworkStore } from "../../store";
 import { formatTime } from "../../utils/date";
 import { useTranslation } from 'react-i18next';
@@ -84,10 +84,10 @@ const TableBox = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    min-width: 980px;
-    @media screen and (max-width: 690px) {
-        min-width: auto;
-    }
+    // min-width: 980px;
+    // @media screen and (max-width: 690px) {
+    //     min-width: auto;
+    // }
 `
 const LeftTable = styled.div`
     width: 580px;
@@ -129,7 +129,7 @@ const BtnStyle = styled.div`
     align-items: center;
     gap: 16px;
     position: relative;
-    z-index: 999;
+    z-index: 9;
 `
 const SwapNow = styled.div`
     display: flex;
@@ -283,15 +283,15 @@ function Home() {
     const handleTabClick = (index) => {
         setActiveTab(index);
     }
-    const allList = (params) => {
-        getSwapRank(activeNetwork, params).then((res) => {
-            const {list, total, current} = res.data
+    const allList = (txParams, tvlParams) => {
+        getTvlRank(activeNetwork, tvlParams).then((res) => {
+            const {list, total_amount, current} = res.data
             setRankData(list)
-            const swaptotal = total || 0
-            setRankTotal(swaptotal)
+            const total = total_amount || 0
+            setRankTotal(total)
             setRankCurrent(current)
         })
-        getSwapTx(activeNetwork, params).then(res => {
+        getSwapTx(activeNetwork, txParams).then(res => {
             const {list, total, current} = res.data
             setTxData(list)
             const txtotal = total || 0
@@ -302,21 +302,25 @@ function Home() {
         })
     }
     useEffect(() => {
-        const params = {
-            // start_time: 1718582400000,
-            // end_time: 1719014400000,
-            start_time: 1717502400000,
-            end_time: 1719014400000,
+        const txParams = {
+            start_time: 1713188034855,
+            end_time: 1738353148519,
             limit: 200,
-            pair_address: "0x575212a8763db6bbaf67461440246546d4017707"
+            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
+        }
+        const tvlParams = {
+            limit: 200,
+            activity_name: 'activity:2024-06-14',
+            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
         }
         if(userAddress){
-            params.wallet_address= userAddress
+            txParams.wallet_address= userAddress
+            tvlParams.wallet_address= userAddress
         }
-        allList(params)
+        allList(txParams, tvlParams)
         const timer = setInterval(() => {
-            if (params.end_time > Date.now()) {
-                allList(params)
+            if (txParams.end_time > Date.now()) {
+                allList(txParams, tvlParams)
             } else{
                 clearInterval(timer)
             }
@@ -347,7 +351,7 @@ function Home() {
                             </TextStyle>
                             <TextStyle size={24} hsize={14} color={'#24282B'}>
                                 {t('trade_to_split')} [
-                                    <span className={'orange'}> $50,000 USDT </span>
+                                    <span className={'orange'}> $60,000 USDT </span>
                                 ] 
                             </TextStyle>
                         </Title>
@@ -372,7 +376,7 @@ function Home() {
                         <LeftTable className={activeTab === 1? 'open':'close'}>
                             <FelxTextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>{t('reach')}</TextStyle>
-                                <TextStyle size={36} hsize={24} color={'#E27625'}>$50000</TextStyle>
+                                <TextStyle size={36} hsize={24} color={'#E27625'}>$40000</TextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>USDT</TextStyle>
                                 <LeftTooltip />
                                 <Image src={question}  onClick={() => openModal(2)}/>
@@ -410,7 +414,7 @@ function Home() {
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
                                         <TextStyle size={18} hsize={16} color={'#000'}>{t('your_volume')}：</TextStyle>
-                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{`$ ${formattedNumber(rankCurrent?.swap_amount || 0)}`}</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{`$ ${formattedNumber(rankCurrent?.amount || 0)}`}</TextStyle>
                                     </FlexVolume>
                                 </FlexColumn>
                             </AnalysisBox>
