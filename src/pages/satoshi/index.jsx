@@ -19,6 +19,14 @@ import satBackgroundImg from "../../assets/img/satBackgroundImg.png";
 import satBackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
 import tokenImg from "../../assets/img/tokenImg.png";
 import tokenImgh5 from "../../assets/img/tokenImgh5.png";
+import banner1 from "../../assets/img/banner1.png";
+import banner2 from "../../assets/img/banner2.png";
+import banner1h5 from "../../assets/img/banner1h5.png";
+import banner2h5 from "../../assets/img/banner2h5.png";
+import banner1Left from "../../assets/img/banner1Left.png";
+import banner1Right from "../../assets/img/banner1Right.png";
+import banner2Left from "../../assets/img/banner2Left.png";
+import banner2Right from "../../assets/img/banner2Right.png";
 import { formattedNumber } from "../../utils/numbers.js";
 import { satStartCountdown, satEndCountdown, satTime } from "../../utils/activity.js";
 import LeftTooltip from "./components/LeftTooltip";
@@ -59,7 +67,7 @@ const Wrapper = styled.div`
 `
 const MiddlePart = styled.div`
     background-image: url(${tokenImg});
-    background-size: auto 100%;
+    background-size: auto 92%;
     background-position: top center;
     background-repeat: no-repeat;
     position: relative;
@@ -85,14 +93,10 @@ const TableBox = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    // min-width: 980px;
-    // @media screen and (max-width: 690px) {
-    //     min-width: auto;
-    // }
 `
 const LeftTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 800px) {
         width: 100%;
         &.open {
             display: block;
@@ -104,7 +108,7 @@ const LeftTable = styled.div`
 `
 const RightTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 800px) {
         width: 100%;
         &.open {
             display: block;
@@ -247,19 +251,76 @@ const TgImg = styled.img`
 const LeftimgIcon = styled.img`
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -16px;
     @media screen and (max-width: 690px) {
-        width: 84px;
-        position: relative;
+        display: none;
     }
 `
 const RightimgIcon = styled.img`
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -26px;
     @media screen and (max-width: 690px) {
-        width: 114px;
+        display: none;
     }
+`
+const BannerBox = styled.div`
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 18px 0 12px;
+    @media screen and (max-width: 790px) {
+        flex-direction: column;
+        margin: 30px 0 50px;
+    }
+`
+const Banners = styled.div`
+    width: 580px;
+    height: 100px;
+    background-color: #24282B;
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    border: 4px solid #FFDB58;
+    box-shadow: 4px 4px 0px 0px #000;
+    box-sizing: border-box;
+    position: relative;
+    @media screen and (max-width: 790px) {
+        width: 100%;
+        height: 80px;
+    }
+`
+const LeftBanner = styled(Banners)`
+     background-image: url(${banner1});
+     @media screen and (max-width: 690px) {
+        background-image: url(${banner1h5});
+    }
+`
+const RightBanner = styled(Banners)`
+     background-image: url(${banner2});
+     @media screen and (max-width: 690px) {
+        background-image: url(${banner2h5});
+    }
+`
+const BannerText = styled.div`
+    padding-top: 12px;
+    text-align: center;
+    position: relative;
+    z-index: 99;
+    text-wrap: nowrap;
+`
+const IconPositionLeft = styled.img`
+    height: 100%;
+    position: absolute;
+    left: 6px;
+    top: 0;
+`
+const IconPositionRight = styled.img`
+    height: 100%;
+    position: absolute;
+    right: 6px;
+    top: 0;
 `
 
 function Home() {
@@ -335,10 +396,6 @@ function Home() {
     const closeModal = () => {
         setIsOpen(false)
     }
-    const toSwapNow = () => {
-        const route = `/swap?inputCurrency=0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf&outputCurrency=0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
-        toMacaronRoute(route)
-    }
     return(
         <PageBg>
             <PageWidth>
@@ -358,8 +415,8 @@ function Home() {
                         <BtnStyle>
                             <Countdown endDate={satEndCountdown} startDate={satStartCountdown}/>
                             <BtnTg>
-                                <SwapNow onClick={toSwapNow}>
-                                    <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
+                                <SwapNow onClick={() => goLink('getSat')}>
+                                    <TextStyle size={20} color={'#24282B'}>{t('get_sat')}</TextStyle>
                                 </SwapNow>
                                 <TgImg src={telegram} onClick={() => goLink('tgLink')} />
                             </BtnTg>
@@ -371,6 +428,22 @@ function Home() {
                         <RightimgIcon src={satRight} />
                     </MiddlePart>
                     <PopUp open={isOpen} closeModal={closeModal} type={type}/>
+                    <BannerBox>
+                        <LeftBanner>
+                            <IconPositionLeft src={banner1Left} />
+                            <BannerText>
+                                <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('swap_sat')}</TextStyle>
+                            </BannerText>
+                            <IconPositionRight src={banner1Right} />
+                        </LeftBanner>
+                        <RightBanner>
+                            <IconPositionLeft src={banner2Left} />
+                            <BannerText>
+                                <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('add_sat')}</TextStyle>
+                            </BannerText>
+                            <IconPositionRight src={banner2Right} />
+                        </RightBanner>
+                    </BannerBox>
                     <Tabs activeTab={activeTab} onTabClick={handleTabClick} tabItems={tabItems} />
                     <TableBox>
                         <LeftTable className={activeTab === 1? 'open':'close'}>
@@ -387,7 +460,7 @@ function Home() {
                                     <TextStyle size={18} hsize={16} color={'#000'}>{t('tx_number')}</TextStyle>
                                     <FelxText>
                                         <TextStyle size={36} hsize={24} color={'#000'}>{formattedNumber(txTotal)} /</TextStyle>
-                                        <TextStyle size={20} hsize={16} color={'#6A6969'}>100,000</TextStyle>
+                                        <TextStyle size={20} hsize={16} color={'#6A6969'}>80,000</TextStyle>
                                     </FelxText>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />

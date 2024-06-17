@@ -100,6 +100,9 @@
     "left_3_text3": "3. Trong suốt cuộc thi này, không có giới hạn giao dịch tối",
 
     "sat文案": "",
+    "get_sat": "Lấy SAT",
+    "swap_sat": "Hoán đổi SAT/WBTC",
+    "add_sat": "Thêm thanh khoản SAT/WBTC",
     "sat-split": "Thêm thanh khoản để chia tách",
     "accumulatedtvl": "Tổng TVL tích lũy",
     "tvl_added": "TVL đã thêm",

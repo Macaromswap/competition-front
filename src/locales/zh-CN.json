@@ -100,6 +100,9 @@
     "left_3_text3": "3. 本次大赛期间不设置最低交易额限制。",
 
     "sat文案": "",
+    "get_sat": "获取 SAT",
+    "swap_sat": "交换 SAT/WBTC",
+    "add_sat": "添加 SAT/WBTC 流动性",
     "sat-split": "为拆分添加流动性",
     "accumulatedtvl": "累计TVL",
     "tvl_added": "添加TVL",
