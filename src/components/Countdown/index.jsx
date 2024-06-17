@@ -35,7 +35,7 @@ const formatTime = (time) => {
   	return time < 10 ? `0${time}` : time;
 };
 
-const Countdown = ({ endDate, startDate=1 }) => {
+const Countdown = ({ endDate, startDate }) => {
     const { t, i18n } = useTranslation();
 
     const calculateTimeLeft = (difference) => {

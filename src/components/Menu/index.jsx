@@ -107,11 +107,11 @@ const StyledNavLink = styled.div`
     align-items: center;
     box-sizing: border-box;
     position: relative;
-    z-index: 99;
     &.active {
         color: #fff;
         background: #000;
         transform: skewX(-15deg);
+        z-index: 99;
         span {
             transform: skewX(15deg);
         }
