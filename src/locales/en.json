@@ -109,6 +109,9 @@
     "left_3_text3": "3. There is no minimum trading volume restriction.",
 
     "sat文案": "",
+    "get_sat": "Get SAT",
+    "swap_sat": "Swap SAT/WBTC",
+    "add_sat": "Add SAT/WBTC Liquidity",
     "sat-split": "Add Liquidity to Split",
     "accumulatedtvl": "Accumulated TVL",
     "tvl_added": "TVL Added",

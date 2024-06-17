@@ -82,12 +82,12 @@ const links = {
     'brandKit': 'https://github.com/Macaromswap/BrandKit',
     'ecosystem': 'https://www.macaron.biz/#/ecosystem?lang=en',
     'token': 'https://info.macaron.biz/#/tokens',
-    'tgLink': 'https://t.me/Macaron_Riders'
+    'tgLink': 'https://t.me/Macaron_Riders',
+    'getSat': 'https://app.satoshiprotocol.org/'
 }
 
 export function goLink(text) {
     let link = links[text]
-    console.log(link);
     if (link) {
         window.open(link, '_blank')
     }

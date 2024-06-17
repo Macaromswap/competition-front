@@ -108,6 +108,9 @@
     "left_3_text3": "3. 本次大賽期間不設置最低交易額限制。",
 
     "sat文案": "",
+    "get_sat": "獲取 SAT",
+    "swap_sat": "交換 SAT/WBTC",
+    "add_sat": "添加 SAT/WBTC 流動性",
     "sat-split": "為拆分添加流動性",
     "accumulatedtvl": "累計TVL",
     "tvl_added": "添加TVL",

@@ -100,6 +100,9 @@
     "left_3_text3": "3. 本大会期間中は最低取引額の制限はありません。",
 
     "sat文案": "",
+    "get_sat": "SAT を取得",
+    "swap_sat": "SAT/WBTC をスワップ",
+    "add_sat": "SAT/WBTC 流動性を追加",
     "sat-split": "流動性を追加して分割",
     "accumulatedtvl": "累積TVL",
     "tvl_added": "追加されたTVL",
