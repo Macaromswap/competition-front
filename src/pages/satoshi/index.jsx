@@ -20,6 +20,7 @@ import satBackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
 import tokenImg from "../../assets/img/tokenImg.png";
 import tokenImgh5 from "../../assets/img/tokenImgh5.png";
 import { formattedNumber } from "../../utils/numbers.js";
+import { satStartCountdown, satEndCountdown, satTime } from "../../utils/activity.js";
 import LeftTooltip from "./components/LeftTooltip";
 import RightTooltip from "./components/RightTooltip";
 import Gauge from "../../components/Gauge";
@@ -70,7 +71,7 @@ const MiddlePart = styled.div`
 `
 const Title = styled.div`
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom:44px;
     @media screen and (max-width: 690px) {
         text-align: left;
     }
@@ -272,7 +273,6 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-06-22 08:00:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
@@ -303,8 +303,8 @@ function Home() {
     }
     useEffect(() => {
         const txParams = {
-            start_time: 1713188034855,
-            end_time: 1738353148519,
+            start_time: satTime[0],
+            end_time: satTime[1],
             limit: 200,
             pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
         }
@@ -356,7 +356,7 @@ function Home() {
                             </TextStyle>
                         </Title>
                         <BtnStyle>
-                            <Countdown endDate={targetDate} />
+                            <Countdown endDate={satEndCountdown} startDate={satStartCountdown}/>
                             <BtnTg>
                                 <SwapNow onClick={toSwapNow}>
                                     <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>

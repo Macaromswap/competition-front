@@ -18,6 +18,7 @@ import telegram from "../../assets/img/telegram.png";
 import backgroundImg from "../../assets/img/backgroundImg.png";
 import backgroundImgH5 from "../../assets/img/backgroundImgH5.png";
 import { formattedNumber } from "../../utils/numbers.js";
+import { cbdCountdown, cbdTime } from "../../utils/activity.js";
 import LeftTooltip from "../../components/LeftTooltip";
 import RightTooltip from "../../components/RightTooltip";
 import Gauge from "../../components/Gauge";
@@ -252,7 +253,6 @@ function Home() {
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
-    const targetDate = '2024-06-08 19:59:00'
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
 
@@ -283,8 +283,8 @@ function Home() {
     }
     useEffect(() => {
         const params = {
-            start_time: 1717502400000,
-            end_time: 1717847940000,
+            start_time: cbdTime[0],
+            end_time: cbdTime[1],
             limit: 200,
         }
         if(userAddress){
@@ -330,7 +330,7 @@ function Home() {
                         </TextStyle>
                     </Title>
                     <BtnStyleH5>
-                        <Countdown endDate={targetDate} />
+                        <Countdown endDate={cbdCountdown} />
                         <BtnTg>
                             <SwapNow onClick={toSwapNow}>
                                 <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
@@ -344,7 +344,7 @@ function Home() {
                     <FlexStyle>
                         <LeftimgIcon />
                         <BtnStyle>
-                            <Countdown endDate={targetDate} />
+                            <Countdown endDate={cbdCountdown} />
                             <BtnTg>
                                 <SwapNow onClick={toSwapNow}>
                                     <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
