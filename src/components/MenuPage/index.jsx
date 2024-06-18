@@ -164,13 +164,13 @@ function MenuPage({handleClick}) {
                             <IconBox>
                                 <LogoIcon src={satoshi} />
                             </IconBox>
-                            <TextStyle color={'#24282B'} size={16}><span>Satoshi</span></TextStyle>
+                            <TextStyle color={'#24282B'} size={18}><span>Satoshi</span></TextStyle>
                         </RouterNavLink>
                         <RouterNavLink to='/cbd'>
                             <IconBox>
                                 <LogoIcon src={cbd} />
                             </IconBox>
-                            <TextStyle color={'#24282B'} size={16}><span>CBD</span></TextStyle>
+                            <TextStyle color={'#24282B'} size={18}><span>CBD</span></TextStyle>
                         </RouterNavLink>
                     </CompetitionMenu>
                 </NavList>

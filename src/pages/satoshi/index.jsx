@@ -96,7 +96,7 @@ const TableBox = styled.div`
 `
 const LeftTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 900px) {
         width: 100%;
         &.open {
             display: block;
@@ -108,7 +108,7 @@ const LeftTable = styled.div`
 `
 const RightTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 900px) {
         width: 100%;
         &.open {
             display: block;
@@ -209,8 +209,8 @@ const FlexVolume = styled.div`
     display: flex;
     align-items: center;
     @media screen and (max-width: 690px) {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
         img {
             display: none;
         }
@@ -268,7 +268,7 @@ const BannerBox = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    margin: 18px 0 12px;
+    margin: 18px 0 42px;
     @media screen and (max-width: 790px) {
         flex-direction: column;
         margin: 30px 0 50px;
