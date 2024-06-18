@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { TextStyle } from '../../components/Text/TextCss'
 import close from "../../assets/img/close.png";
 import { useTranslation } from 'react-i18next';
+import { goLink } from "../../utils";
 
 const Overlay = styled.div`
   position: fixed;
@@ -112,6 +113,27 @@ const UlBox = styled.ul`
         }
     }
 `
+const OlBox = styled.ol`
+    padding-left: 30px;
+    margin:0;
+    list-style-color: #6A6969;
+    font-size: 16px;
+    font-family: ENGLISH-VILANE-MEDIUM;
+    li {
+        &::marker {
+          color: #6A6969; /* Custom color for the markers */
+        }
+    }
+`
+const Flex = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+const LinkStyle = styled.div`
+    cursor: pointer;
+    text-decoration-line: underline;
+    color: #5576f2;
+`
 
 const PopupComponent = ({open, closeModal, type}) => {
     const { t, i18n } = useTranslation();
@@ -177,6 +199,52 @@ const PopupComponent = ({open, closeModal, type}) => {
                                         {t('sat_right_text7')}<br />
                                         {t('sat_right_text8')}
                                      </TextStyle> 
+                                </div>
+                                <div>
+                                    <TextStyle color={'#24282B'} size={20}>{t('sat_rules_how1')}</TextStyle>
+                                    <TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text1')}</TextStyle>
+                                </div>
+                                <div>
+                                    <OlBox>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text2')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text3')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text4')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text5')}</TextStyle></li>
+                                    </OlBox>
+                                </div>
+                                <div>
+                                    <Flex>
+                                        <TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text6')}</TextStyle>
+                                        <LinkStyle onClick={()=> goLink('howGetSat')}>
+                                            <TextStyle color={'#5576f2'} size={16}>
+                                                https://youtu.be/__IsmvhLN8I?t=42
+                                            </TextStyle>
+                                        </LinkStyle>
+                                    </Flex>
+                                </div>
+                                <div>
+                                    <TextStyle color={'#24282B'} size={20}>{t('sat_rules_how2')}</TextStyle>
+                                    <TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text1')}</TextStyle>
+                                </div>
+                                <div>
+                                    <OlBox>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text2')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text3')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text4')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text5')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text6')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how2_text7')}</TextStyle></li>
+                                    </OlBox>
+                                </div>
+                                <div>
+                                    <Flex>
+                                        <TextStyle color={'#6A6969'} size={16}>{t('sat_rules_how1_text6')}</TextStyle>
+                                        <LinkStyle onClick={()=> goLink('howSwapSat')}>
+                                            <TextStyle color={'#5576f2'} size={16}>
+                                                https://youtu.be/pUvQUXs7gIs?t=15
+                                            </TextStyle>
+                                        </LinkStyle>
+                                    </Flex>
                                 </div>
                             </Content>
                         )
