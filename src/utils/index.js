@@ -84,7 +84,7 @@ const links = {
     'token': 'https://info.macaron.biz/#/tokens',
     'tgLink': 'https://t.me/Macaron_Riders',
     'getSat': 'https://app.satoshiprotocol.org/',
-    'satTgLink': 'https://t.me/Macaron_Riders',
+    'satTgLink': 'https://t.me/Macaron_Riders'
 }
 
 export function goLink(text) {

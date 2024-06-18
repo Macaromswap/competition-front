@@ -286,6 +286,7 @@ const Banners = styled.div`
     box-shadow: 4px 4px 0px 0px #000;
     box-sizing: border-box;
     position: relative;
+    cursor: pointer;
     @media screen and (max-width: 790px) {
         width: 100%;
         height: 80px;
@@ -396,6 +397,14 @@ function Home() {
     const closeModal = () => {
         setIsOpen(false)
     }
+    const bannerLeftClick = () => {
+        const route = `/swap?inputCurrency=0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf&outputCurrency=0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
+        toMacaronRoute(route)
+    }
+    const bannerRightClick = () => {
+        const route = `/add/0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf/0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
+        toMacaronRoute(route)
+    }
     return(
         <PageBg>
             <PageWidth>
@@ -429,14 +438,14 @@ function Home() {
                     </MiddlePart>
                     <PopUp open={isOpen} closeModal={closeModal} type={type}/>
                     <BannerBox>
-                        <LeftBanner>
+                        <LeftBanner onClick={bannerLeftClick}>
                             <IconPositionLeft src={banner1Left} />
                             <BannerText>
                                 <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('swap_sat')}</TextStyle>
                             </BannerText>
                             <IconPositionRight src={banner1Right} />
                         </LeftBanner>
-                        <RightBanner>
+                        <RightBanner onClick={bannerRightClick}>
                             <IconPositionLeft src={banner2Left} />
                             <BannerText>
                                 <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('add_sat')}</TextStyle>
