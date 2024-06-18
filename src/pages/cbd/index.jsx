@@ -71,14 +71,10 @@ const TableBox = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    min-width: 980px;
-    @media screen and (max-width: 690px) {
-        min-width: auto;
-    }
 `
 const LeftTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 900px) {
         width: 100%;
         &.open {
             display: block;
@@ -90,7 +86,7 @@ const LeftTable = styled.div`
 `
 const RightTable = styled.div`
     width: 580px;
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 900px) {
         width: 100%;
         &.open {
             display: block;
