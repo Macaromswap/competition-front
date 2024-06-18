@@ -367,12 +367,12 @@ function Home() {
             start_time: satTime[0],
             end_time: satTime[1],
             limit: 200,
-            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
+            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
         }
         const tvlParams = {
             limit: 200,
-            activity_name: 'activity:2024-06-14',
-            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
+            activity_name: 'p-0619',
+            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
         }
         if(userAddress){
             txParams.wallet_address= userAddress
@@ -418,7 +418,7 @@ function Home() {
                                 <SwapNow onClick={() => goLink('getSat')}>
                                     <TextStyle size={20} color={'#24282B'}>{t('get_sat')}</TextStyle>
                                 </SwapNow>
-                                <TgImg src={telegram} onClick={() => goLink('tgLink')} />
+                                <TgImg src={telegram} onClick={() => goLink('satTgLink')} />
                             </BtnTg>
                             <Rules onClick={() => openModal(1)}>
                                 <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>

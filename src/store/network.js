@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const useNetworkStore = create((set, get) => ({
     isLoaded: true,
-    activeNetwork: 200810, // 200901
+    activeNetwork: 200901, // 200810
     userAddress: '',
     bgImg: '../assets/img/backgroundImg.png',
     setBgImg: (bg) => set({ bgImg: bg }),
