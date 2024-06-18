@@ -83,7 +83,10 @@ const links = {
     'ecosystem': 'https://www.macaron.biz/#/ecosystem?lang=en',
     'token': 'https://info.macaron.biz/#/tokens',
     'tgLink': 'https://t.me/Macaron_Riders',
-    'getSat': 'https://app.satoshiprotocol.org/'
+    'getSat': ' https://lihi.cc/yOuj3',
+    'satTgLink': 'https://t.me/Macaron_Riders',
+    'howGetSat': 'https://youtu.be/__IsmvhLN8I?t=42',
+    'howSwapSat': 'https://youtu.be/pUvQUXs7gIs?t=15',
 }
 
 export function goLink(text) {

@@ -286,6 +286,7 @@ const Banners = styled.div`
     box-shadow: 4px 4px 0px 0px #000;
     box-sizing: border-box;
     position: relative;
+    cursor: pointer;
     @media screen and (max-width: 790px) {
         width: 100%;
         height: 80px;
@@ -367,12 +368,12 @@ function Home() {
             start_time: satTime[0],
             end_time: satTime[1],
             limit: 200,
-            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
+            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
         }
         const tvlParams = {
             limit: 200,
-            activity_name: 'activity:2024-06-14',
-            pair_address: "0x1cfd2923989ab4956bea5c3afc641596786ab699", // 0x575212a8763db6bbaf67461440246546d4017707
+            activity_name: 'p-0619',
+            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
         }
         if(userAddress){
             txParams.wallet_address= userAddress
@@ -396,6 +397,14 @@ function Home() {
     const closeModal = () => {
         setIsOpen(false)
     }
+    const bannerLeftClick = () => {
+        const route = `/swap?inputCurrency=0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf&outputCurrency=0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
+        toMacaronRoute(route)
+    }
+    const bannerRightClick = () => {
+        const route = `/add/0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf/0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
+        toMacaronRoute(route)
+    }
     return(
         <PageBg>
             <PageWidth>
@@ -418,7 +427,7 @@ function Home() {
                                 <SwapNow onClick={() => goLink('getSat')}>
                                     <TextStyle size={20} color={'#24282B'}>{t('get_sat')}</TextStyle>
                                 </SwapNow>
-                                <TgImg src={telegram} onClick={() => goLink('tgLink')} />
+                                <TgImg src={telegram} onClick={() => goLink('satTgLink')} />
                             </BtnTg>
                             <Rules onClick={() => openModal(1)}>
                                 <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
@@ -429,14 +438,14 @@ function Home() {
                     </MiddlePart>
                     <PopUp open={isOpen} closeModal={closeModal} type={type}/>
                     <BannerBox>
-                        <LeftBanner>
+                        <LeftBanner onClick={bannerLeftClick}>
                             <IconPositionLeft src={banner1Left} />
                             <BannerText>
                                 <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('swap_sat')}</TextStyle>
                             </BannerText>
                             <IconPositionRight src={banner1Right} />
                         </LeftBanner>
-                        <RightBanner>
+                        <RightBanner onClick={bannerRightClick}>
                             <IconPositionLeft src={banner2Left} />
                             <BannerText>
                                 <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('add_sat')}</TextStyle>

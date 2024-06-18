@@ -133,5 +133,20 @@
     "sat_rules_text6": "この賞金プールは、累積SAT/WBTC LPインデックスが$2Mを超えた場合にのみ有効です。",
     "sat_rules_text7": "ランキングはSAT/WBTCの取引ペアのLPインデックスに基づいています。",
     "sat_rules_text8": "SAT/WBTC LPインデックスは、ユーザーが提供した累積LP量を意味します。例: $100 LP*1日 = $100; 2日, $200。LPインデックスは現在のプール内のLPサイズとは異なります。",
-    "sat_rules_text9": "Macaronはユーザーが追加したLPの量を4時間ごとにスナップショットします。スナップショットの間隔内に$100以上のLPを追加したユーザーはカウントされ、$100未満のLPを追加したユーザーは比例してカウントされます。"
+    "sat_rules_text9": "Macaronはユーザーが追加したLPの量を4時間ごとにスナップショットします。スナップショットの間隔内に$100以上のLPを追加したユーザーはカウントされ、$100未満のLPを追加したユーザーは比例してカウントされます。",
+    "sat_rules_how1": "どうやって $SAT を手に入れるの？",
+    "sat_rules_how2": "どうやって $SAT を交換するの？",
+    "sat_rules_how1_text1": "$SAT はビットコインによって裏付けられた米ドル連動のステーブルコインです。BTC を担保として預け入れ、Satoshi Protocol でステーブルコイン $SAT を発行できます。",
+    "sat_rules_how1_text2": "Satoshi APP に移動します。",
+    "sat_rules_how1_text3": "“Position” に移動します。",
+    "sat_rules_how1_text4": "紹介者のアドレスを入力します（150 ポイント）。",
+    "sat_rules_how1_text5": "BTC を預け入れ、SAT を借ります。",
+    "sat_rules_how1_text6": "ビデオチュートリアル：",
+    "sat_rules_how2_text1": "Macaron DEX で SAT-wBTC ペアの流動性を追加し、交換することができます。",
+    "sat_rules_how2_text2": "“スワップ” に移動します。",
+    "sat_rules_how2_text3": "BTC と SAT を検索します。",
+    "sat_rules_how2_text4": "SAT を BTC に交換します。",
+    "sat_rules_how2_text5": "“プール” に移動します。",
+    "sat_rules_how2_text6": "SAT-wBTC ペアを選択します。",
+    "sat_rules_how2_text7": "流動性を追加します。"
 }
