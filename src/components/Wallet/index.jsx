@@ -144,7 +144,7 @@ const Wallet = () => {
         if(address === '') {
             return '-'
         }
-        return `${address.substring(0, 6)}...${address.substring(42 - 4)}`
+        return `${address.substring(0, 6)}...${address.substring(42 - 2)}`
     }
 
     return (

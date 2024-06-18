@@ -162,7 +162,7 @@ const Trophy = ({ src }) => {
     );
 };
 
-const Tables = ({ data, meData }) => {
+const Tables = ({ data, meData, volName }) => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { activeNetwork } = useNetworkStore()
@@ -206,7 +206,7 @@ const Tables = ({ data, meData }) => {
                         </TableCol>
                         <TableCol>
                             <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
-                                {t('tr_vol')}
+                                {volName === 'tvl_added'? t('tvl_added'): t('tr_vol') }
                             </Text>
                         </TableCol>
                     </HeaderRow>
@@ -229,7 +229,14 @@ const Tables = ({ data, meData }) => {
                                 <Ellipsis color={'#24282B'} size={16} hsize={14} justify={'true'}>{shortenAddress(meData.creator)}</Ellipsis>
                             </TableCol>
                             <TableCol>
-                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>$ {formattedNumber(meData.swap_amount)}</TextStyle>
+                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
+                                    {
+                                        meData.swap_amount? 
+                                        `$ ${formattedNumber(meData.swap_amount)}`
+                                        :
+                                        `$ ${formattedNumber(meData.amount)}`
+                                    }
+                                </TextStyle>
                             </TableCol>
                         </MeTableRow>
                         <ImgMe />
@@ -252,7 +259,14 @@ const Tables = ({ data, meData }) => {
                                 <Ellipsis color={'#24282B'} size={16} hsize={14} justify={'true'}>{shortenAddress(row.creator)}</Ellipsis>
                             </TableCol>
                             <TableCol>
-                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>$ {formattedNumber(row.swap_amount)}</TextStyle>
+                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
+                                    {
+                                        row.swap_amount? 
+                                        `$ ${formattedNumber(row.swap_amount)}`
+                                        :
+                                        `$ ${formattedNumber(row.amount)}`
+                                    }
+                                </TextStyle>
                             </TableCol>
                         </TableRow>
                     </RowShadow>

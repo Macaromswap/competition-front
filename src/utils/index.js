@@ -58,7 +58,7 @@ const hostNameInfo = () => {
 export function toMacaronRoute(route) {
     const tradeURL = hostName()
     const link = `${tradeURL}/#${route}`
-    window.open(link, '_self')
+    window.open(link, '_blank')
 }
 
 export function toMacaronInfo(route) {
@@ -82,12 +82,13 @@ const links = {
     'brandKit': 'https://github.com/Macaromswap/BrandKit',
     'ecosystem': 'https://www.macaron.biz/#/ecosystem?lang=en',
     'token': 'https://info.macaron.biz/#/tokens',
-    'tgLink': 'https://t.me/Macaron_Riders'
+    'tgLink': 'https://t.me/Macaron_Riders',
+    'getSat': 'https://app.satoshiprotocol.org/',
+    'satTgLink': 'https://t.me/Macaron_Riders'
 }
 
 export function goLink(text) {
     let link = links[text]
-    console.log(link);
     if (link) {
         window.open(link, '_blank')
     }

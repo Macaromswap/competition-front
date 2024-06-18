@@ -6,12 +6,12 @@ import { useTranslation } from 'react-i18next';
 const CountdownContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 14px;
 `;
 
 const TimeBox = styled.div`
-  margin: 0 10px;
+  margin: 0 5px;
   text-align: center;
 `;
 const DateBox = styled.div`
@@ -32,29 +32,29 @@ const DateBox = styled.div`
 `;
 
 const formatTime = (time) => {
-  return time < 10 ? `0${time}` : time;
+  	return time < 10 ? `0${time}` : time;
 };
 
-const Countdown = ({ endDate }) => {
+const Countdown = ({ endDate, startDate }) => {
     const { t, i18n } = useTranslation();
 
-    const calculateTimeLeft = () => {
-        const difference = new Date(endDate) - new Date();
+    const calculateTimeLeft = (difference) => {
+        const startDifference = new Date(startDate) - new Date();
         let timeLeft = {};
-        if (difference > 0) {
-          timeLeft = {
-            days: formatTime(Math.floor(difference / (1000 * 60 * 60 * 24))),
-            hours: formatTime(Math.floor((difference / (1000 * 60 * 60)) % 24)),
-            minutes: formatTime(Math.floor((difference / 1000 / 60) % 60)),
-            seconds: formatTime(Math.floor((difference / 1000) % 60)),
-          };
+        if (startDifference < 0) {
+          	timeLeft = {
+          	  	days: formatTime(Math.floor(difference / (1000 * 60 * 60 * 24))),
+          	  	hours: formatTime(Math.floor((difference / (1000 * 60 * 60)) % 24)),
+          	  	minutes: formatTime(Math.floor((difference / 1000 / 60) % 60)),
+          	  	seconds: formatTime(Math.floor((difference / 1000) % 60)),
+          	};
         } else {
-          timeLeft = {
-            days: '00',
-            hours: '00',
-            minutes: '00',
-            seconds: '00',
-          };
+          	timeLeft = {
+          	  	days: '00',
+          	  	hours: '00',
+          	  	minutes: '00',
+          	  	seconds: '00',
+          	};
         }
 
         return timeLeft;
@@ -64,17 +64,18 @@ const Countdown = ({ endDate }) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-      
-      if (newTimeLeft.days === '00' && newTimeLeft.hours === '00' && 
-          newTimeLeft.minutes === '00' && newTimeLeft.seconds === '00') {
-          clearInterval(timer);
-      }
+      	const difference = new Date(endDate) - new Date();
+		
+      	if (difference > 0) {
+      	  	const newTimeLeft = calculateTimeLeft(difference);
+      	  	setTimeLeft(newTimeLeft);
+      	}else {
+      	  	clearInterval(timer);
+      	}
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [endDate]);
+  }, [endDate, startDate]);
 
   return (
     <CountdownContainer>
@@ -87,6 +88,9 @@ const Countdown = ({ endDate }) => {
         <TextStyle color={'#000'} size={12}>{t('days')}</TextStyle>
       </TimeBox>
       <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
+      </TimeBox>
+      <TimeBox>
         <DateBox>
             <TextStyle color={'#FEFEFE'} size={30} hsize={24}>
                 {timeLeft.hours}
@@ -95,12 +99,18 @@ const Countdown = ({ endDate }) => {
         <TextStyle color={'#000'} size={12}>{t('hours')}</TextStyle>
       </TimeBox>
       <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
+      </TimeBox>
+      <TimeBox>
         <DateBox>
             <TextStyle color={'#FEFEFE'} size={30} hsize={24}>
                 {timeLeft.minutes}
             </TextStyle>
         </DateBox>
         <TextStyle color={'#000'} size={12}>{t('minutes')}</TextStyle>
+      </TimeBox>
+      <TimeBox>
+        <TextStyle color={'#000'} size={30}>:</TextStyle>
       </TimeBox>
       <TimeBox>
         <DateBox>

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { TextStyle } from '../../components/Text/TextCss'
 
 const Wrapper = styled.div`
-    margin-bottom: 30px;
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 900px) {
         padding: 0;
         margin-bottom: 20px;
     }
@@ -21,7 +20,7 @@ const FlexStyle = styled.div`
     background: #fff;
     height: 48px;  
     border-radius: 14px;
-    @media screen and (max-width: 690px) {
+    @media screen and (max-width: 900px) {
         display: flex;
     }
     @media screen and (min-width: 691px) {
@@ -36,7 +35,7 @@ const FlexStyle = styled.div`
 
 const StyledTabItem = styled.div`
     flex: 1;
-    height: 56px;
+    height: 48px;
     cursor: pointer;
     color: #fff;
     display: flex;
