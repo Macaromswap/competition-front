@@ -115,6 +115,7 @@
     "sat-split": "Add Liquidity to Split",
     "accumulatedtvl": "Accumulated TVL",
     "tvl_added": "TVL Added",
+    "add_liquidity": "Add Liquidity",
     "sat_left_title": "Prize Pool 1: $40000 USDT based on TX Number rankings.",
     "sat_left_text1": "This prize pool ONLY becomes valid after reaching the threshold of 80000 TXs.",
     "sat_left_text2": "Users trade SAT/WBTC on Macaron. ",
