@@ -119,7 +119,7 @@
     "sat_left_text7": "Top 16-25: Mỗi người $500",
     "sat_left_text8": "Top 26-45: Mỗi người $400",
     "sat_right_title": "Quỹ thưởng Satoshi 2 - Chỉ số LP SAT/WBTC ($20000 USDT)",
-    "sat_right_text1": "Quỹ này chỉ có hiệu lực sau khi đạt ngưỡng tổng chỉ số LP là $2M USDT.",
+    "sat_right_text1": "Giải thưởng này phải đáp ứng chỉ số LP tích lũy trong suốt cuộc thi để đạt được giải thưởng 2 triệu điểm có hiệu lực.",
     "sat_right_text2": "Xếp hạng dựa trên chỉ số LP của cặp giao dịch SAT/WBTC.",
     "sat_right_text3": "Chỉ số LP SAT/WBTC là tổng số LP mà người dùng cung cấp. Ví dụ: $100U*1 ngày = $100U, $100U*2 ngày = $200U (cách tính chỉ số LP; chỉ số LP không bằng với thanh khoản hiện tại trong hồ bơi).",
     "sat_right_text4": "Trong suốt cuộc thi, Macaron sẽ chụp nhanh số lượng LP mà người dùng đã thêm mỗi 4 giờ. Nếu thêm trên $100 thì được tính, nếu dưới $100 thì tính theo tỷ lệ.",

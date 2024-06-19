@@ -127,7 +127,7 @@
     "sat_left_text7": "Top 16-25: 每人 $500",
     "sat_left_text8": "Top 26-45: 每人 $400",
     "sat_right_title": "Satoshi獎池2 - SAT/WBTC LP獎池 （$20000USDT）",
-    "sat_right_text1": "本獎池須滿足大賽期間累計LP指數達到$200萬USDT以上獎項生效。",
+    "sat_right_text1": "本獎池須滿足大賽期間累計LP指數達到200萬積分獎項生效。",
     "sat_right_text2": "規則：按照在SAT/WBTC添加LP金額/day的總排名。",
     "sat_right_text3": "SAT/WBTC LP指數指的是用戶提供LP的累計TVL。例如：$100U*1day = $100U, $100*2days = $200U（LP指數計算方式；LP指數不等於當前池子裡的流動性）。",
     "sat_right_text4": "大賽期間，Macaron將會每四個小時針對用戶增加LP的金額進行快照，如滿足$100以上則符合，如不滿足$100則按照比例計算。",
