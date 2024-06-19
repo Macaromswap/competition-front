@@ -357,7 +357,7 @@ function Home() {
             const {list, total, current} = res.data
             setTxData(list)
             const txtotal = total || 0
-            const perc = txtotal / 100000 * 100
+            const perc = txtotal / 80000 * 100
             setPercent(perc)
             setTxTotal(txtotal)
             setTxCurrent(current)
