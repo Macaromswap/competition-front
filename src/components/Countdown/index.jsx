@@ -60,7 +60,7 @@ const Countdown = ({ endDate, startDate }) => {
         return timeLeft;
     };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState({days: '00', hours: '00', minutes: '00', seconds: '00',});
 
   useEffect(() => {
     const timer = setInterval(() => {
