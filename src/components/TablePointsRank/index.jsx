@@ -7,14 +7,14 @@ import staricon from "../../assets/img/staricon.png";
 import { TableWrapper, PaginationWrapper, PaginationButtonBack, PaginationButton, PaginationButtonGo } from "../Table";
 import { useNetworkStore } from "../../store";
 import { formatTime } from "../../utils/date";
-import { formattedNumber } from "../../utils/numbers";
+import { formattedNumber, numFloor } from "../../utils/numbers";
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as ImgMeIcon } from '../../assets/img/me.svg'
 
 const RowColumns = styled.div`
     height: 72px;
     box-sizing: border-box;
-    padding: 0px 60px;
+    padding: 0px 36px;
     background-color: #FFF;
     border: 2px solid #000;
     position: relative;
@@ -23,7 +23,7 @@ const RowColumns = styled.div`
     display: grid;
     align-items: center;
     gap: 10px;
-    grid-template-columns: 80px repeat(2, 1fr);
+    grid-template-columns: 80px repeat(3, 1fr);
     @media screen and (max-width: 1000px) {
         height:100%;
         padding: 14px 20px;
@@ -31,6 +31,9 @@ const RowColumns = styled.div`
     }
     @media screen and (max-width: 690px) {
         grid-template-columns: 40px 1fr 1.4fr;
+        >*:nth-child(3) {
+            display: none;
+        }
     }
 }
 `
@@ -81,6 +84,9 @@ const TableCol = styled.div`
         justify-content: flex-start;
     }
     &:nth-child(3) {
+        justify-content: flex-end;
+    }
+    &:nth-child(4) {
         justify-content: flex-end;
     }
 `
@@ -206,7 +212,12 @@ const Tables = ({ data, meData, volName }) => {
                         </TableCol>
                         <TableCol>
                             <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
-                                {t('tr_vol')}
+                                {t('tvl_added')}
+                            </Text>
+                        </TableCol>
+                        <TableCol>
+                            <Text color={'#6A6969'} size={16} hsize={12} justify={'true'}>
+                                {t('points')}
                             </Text>
                         </TableCol>
                     </HeaderRow>
@@ -230,7 +241,12 @@ const Tables = ({ data, meData, volName }) => {
                             </TableCol>
                             <TableCol>
                                 <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
-                                    $ {formattedNumber(meData.swap_amount)}
+                                    $ {formattedNumber(meData.amount)}
+                                </TextStyle>
+                            </TableCol>
+                            <TableCol>
+                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
+                                    {numFloor(meData.points)}
                                 </TextStyle>
                             </TableCol>
                         </MeTableRow>
@@ -255,7 +271,12 @@ const Tables = ({ data, meData, volName }) => {
                             </TableCol>
                             <TableCol>
                                 <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
-                                    $ {formattedNumber(row.swap_amount)}
+                                    $ {formattedNumber(row.amount)}
+                                </TextStyle>
+                            </TableCol>
+                            <TableCol>
+                                <TextStyle color={'#24282B'} size={16} hsize={14} justify={'true'}>
+                                    {numFloor(row.points)}
                                 </TextStyle>
                             </TableCol>
                         </TableRow>
@@ -263,6 +284,7 @@ const Tables = ({ data, meData, volName }) => {
                 )):[1, 2, 3].map(value => (
                     <RowShadow>
                         <TableRow grid={4} key={value}>
+                            <Skeleton height={16} />
                             <Skeleton height={16} />
                             <Skeleton height={16} />
                             <Skeleton height={16} />

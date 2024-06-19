@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import TableRank from "../../components/TableRank";
+import TablePointsRank from "../../components/TablePointsRank";
 import TableTxRank from "../../components/TableTxRank";
 import Tabs from "../../components/Tabs";
 import { getSwapTx, getTvlRank } from "../../api";
@@ -27,7 +27,7 @@ import banner1Left from "../../assets/img/banner1Left.png";
 import banner1Right from "../../assets/img/banner1Right.png";
 import banner2Left from "../../assets/img/banner2Left.png";
 import banner2Right from "../../assets/img/banner2Right.png";
-import { formattedNumber } from "../../utils/numbers.js";
+import { formattedNumber, numFloor } from "../../utils/numbers.js";
 import { satStartCountdown, satEndCountdown, satTime } from "../../utils/activity.js";
 import LeftTooltip from "./components/LeftTooltip";
 import RightTooltip from "./components/RightTooltip";
@@ -347,9 +347,9 @@ function Home() {
     }
     const allList = (txParams, tvlParams) => {
         getTvlRank(activeNetwork, tvlParams).then((res) => {
-            const {list, total_amount, current} = res.data
+            const {list, total_points, current} = res.data
             setRankData(list)
-            const total = total_amount || 0
+            const total = total_points || 0
             setRankTotal(total)
             setRankCurrent(current)
         })
@@ -405,6 +405,7 @@ function Home() {
         const route = `/add/0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf/0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
         toMacaronRoute(route)
     }
+
     return(
         <PageBg>
             <PageWidth>
@@ -491,16 +492,16 @@ function Home() {
                             <AnalysisBox>
                                 <ImgIconWidth />
                                 <FlexColumn>
-                                    <TextStyle size={18} hsize={16} color={'#000'}>{t('accumulatedtvl')}</TextStyle>
-                                    <TextStyle size={36} hsize={24} color={'#24282B'}>$ {formattedNumber(rankTotal)}</TextStyle>
+                                    <TextStyle size={18} hsize={16} color={'#000'}>{t('accumulated')}</TextStyle>
+                                    <TextStyle size={36} hsize={24} color={'#24282B'}>{numFloor(rankTotal)}</TextStyle>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
-                                        <TextStyle size={18} hsize={16} color={'#000'}>{t('your_volume')}：</TextStyle>
-                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{`$ ${formattedNumber(rankCurrent?.amount || 0)}`}</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#000'}>{t('your_points')}：</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{numFloor(rankCurrent?.points || 0)}</TextStyle>
                                     </FlexVolume>
                                 </FlexColumn>
                             </AnalysisBox>
-                            <TableRank data={rankData} meData={rankCurrent} volName={'tvl_added'}></TableRank>
+                            <TablePointsRank data={rankData} meData={rankCurrent} volName={'tvl_added'}></TablePointsRank>
                         </RightTable>
                     </TableBox>
                 </Wrapper>
