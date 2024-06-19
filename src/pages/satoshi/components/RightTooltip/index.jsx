@@ -91,6 +91,9 @@ const RightTooltip = () => {
                                 <li>
                                     <TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4')}</TextStyle> 
                                 </li>
+                                <li>
+                                    <TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4-5')}</TextStyle> 
+                                </li>
                             </UlBox>
                         </div>
                         <div>

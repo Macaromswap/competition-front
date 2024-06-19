@@ -190,6 +190,7 @@ const PopupComponent = ({open, closeModal, type}) => {
                                         <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text2')}</TextStyle></li>
                                         <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text3')}</TextStyle></li>
                                         <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4')}</TextStyle></li>
+                                        <li><TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4-5')}</TextStyle></li>
                                     </UlBox>
                                 </div>
                                 <div>
@@ -295,6 +296,9 @@ const PopupComponent = ({open, closeModal, type}) => {
                                         </li>
                                         <li>
                                             <TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4')}</TextStyle> 
+                                        </li>
+                                        <li>
+                                            <TextStyle color={'#6A6969'} size={16}>{t('sat_right_text4-5')}</TextStyle> 
                                         </li>
                                     </UlBox>
                                 </div>
