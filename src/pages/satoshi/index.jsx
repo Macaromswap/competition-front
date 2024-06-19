@@ -340,7 +340,7 @@ function Home() {
 
     const tabItems = [
         { label: t('trans_number'), index: 1 },
-        { label: t('tr_vol'), index: 2 },
+        { label: t('add_liquidity'), index: 2 },
     ]
     const handleTabClick = (index) => {
         setActiveTab(index);
