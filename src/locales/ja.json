@@ -106,6 +106,7 @@
     "sat-split": "流動性を追加して分割",
     "accumulatedtvl": "累積TVL",
     "tvl_added": "追加されたTVL",
+    "add_liquidity": "流動性を追加する",
     "sat_left_title": "サトシ賞金プール1 - トランザクション数 ($40000 USDT)",
     "sat_left_text1": "この賞金プールは、トランザクション数が80000を超えた場合にのみ有効です。",
     "sat_left_text2": "ユーザーはMacaronでSAT/WBTCを取引します。",
