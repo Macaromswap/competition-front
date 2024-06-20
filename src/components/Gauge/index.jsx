@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { TextStyle } from '../../components/Text/TextCss'
 import { useTranslation } from 'react-i18next';
+import { numFloor } from "../../utils/numbers.js";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 84px; /* 修改容器的宽度为84px */
-  height: 84px; /* 修改容器的高度为84px */
+  width: 94px; /* 修改容器的宽度为84px */
+  height: 94px; /* 修改容器的高度为84px */
   position: relative;
 `;
 
@@ -26,7 +27,7 @@ const CircleBackground = styled.circle`
 
 const CircleProgress = styled.circle`
   fill: none;
-  stroke: #6fd765;
+  stroke: ${(props) => props.color};
   stroke-width: 10; /* 修改进度圆环的宽度为10 */
   stroke-linecap: round;
   stroke-dasharray: ${(props) => props.dashArray};
@@ -49,27 +50,28 @@ const StatusText = styled.div`
 `;
 
 
-const Gauge = ({ percentage }) => {
+const Gauge = ({ percentage, color="#6fd765" }) => {
     const { t, i18n } = useTranslation();
     const size = '100%';
-    const radius = 37; /* 将半径修改为42 */
+    const radius = 42; /* 将半径修改为42 */
     const circumference = 2 * Math.PI * radius;
-    const dashOffset = circumference * (1 - percentage / 104);
+    const dashOffset = circumference * (1 - percentage / 102);
 
     return (
         <Container>
             <Svg width={size} height={size}>
-                <CircleBackground cx="42" cy="42" r={radius} />
+                <CircleBackground cx="47" cy="47" r={radius} />
                 <CircleProgress
-                  cx="42"
-                  cy="42"
+                  cx="47"
+                  cy="47"
                   r={radius}
+                  color={color}
                   dashArray={circumference}
                   dashOffset={dashOffset}
                 />
             </Svg>
             <StatusText>
-                <TextStyle color={'#24282B'} size={20} hsize={18}>{percentage >=100 ?`100%`:`${percentage.toFixed(2)}%`}</TextStyle>
+                <TextStyle color={'#24282B'} size={20} hsize={18}>{percentage >=100 ?`100%`:`${numFloor(percentage)}%`}</TextStyle>
                 <TextStyle color={'#24282B'} size={12}>{t('progress')}</TextStyle>
             </StatusText>
         </Container>
