@@ -11,7 +11,6 @@ import { useParams } from 'react-router-dom';
 import { TextStyle } from '../../components/Text/TextCss'
 import satLeft from '../../assets/img/satLeft.svg'
 import satRight from '../../assets/img/satRight.svg'
-import { ReactComponent as ImgIcon } from '../../assets/img/group.svg'
 import staricon from "../../assets/img/staricon.png";
 import question from "../../assets/img/question.png";
 import telegram from "../../assets/img/telegram.png";
@@ -172,7 +171,8 @@ const FelxTextStyle = styled.div`
 const FelxText = styled.div`
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    gap: 6px;
+    flex-wrap: nowrap;
 `
 const AnalysisBox = styled.div`
     display: flex;
@@ -193,7 +193,7 @@ const AnalysisBox = styled.div`
     }
     @media screen and (max-width: 690px) {
         padding: 24px 0px;
-        gap: 30px;
+        gap: 16px;
         height: auto;
     }
 `
@@ -220,11 +220,6 @@ const ImgStar = styled.img`
     width: 16px;
     height: 16px;
     margin-right: 5px;
-`
-const ImgIconWidth = styled(ImgIcon)`
-    @media screen and (max-width: 690px) {
-        width: 103px;
-    }
 `
 const Image = styled.img`
     width: 20px;
@@ -334,6 +329,7 @@ function Home() {
     const [txTotal, setTxTotal] = useState(0)
     const [txCurrent, setTxCurrent] = useState({})
     const [ percent, setPercent ] = useState(0.00);
+    const [ pointsPercent, setPointsPercent ] = useState(0.00);
     const [ activeTab, setActiveTab ] = useState(1);
     const [isOpen, setIsOpen] = useState(false);
     const [type, setType] = useState(1);
@@ -350,6 +346,8 @@ function Home() {
             const {list, total_points, current} = res.data
             setRankData(list)
             const total = total_points || 0
+            const pointPerc = total / 2000000 * 100
+            setPointsPercent(pointPerc)
             setRankTotal(total)
             setRankCurrent(current)
         })
@@ -469,8 +467,9 @@ function Home() {
                                 <FlexColumn>
                                     <TextStyle size={18} hsize={16} color={'#000'}>{t('tx_number')}</TextStyle>
                                     <FelxText>
-                                        <TextStyle size={36} hsize={24} color={'#000'}>{formattedNumber(txTotal)} /</TextStyle>
-                                        <TextStyle size={20} hsize={16} color={'#6A6969'}>80,000</TextStyle>
+                                        <TextStyle size={36} hsize={20} color={'#000'}>{formattedNumber(txTotal)}</TextStyle>
+                                        <TextStyle size={36} hsize={20} color={'#000'}>/</TextStyle>
+                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>80,000</TextStyle>
                                     </FelxText>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
@@ -490,10 +489,14 @@ function Home() {
                                 <Image src={question}  onClick={() => openModal(3)}/>
                             </FelxTextStyle>
                             <AnalysisBox>
-                                <ImgIconWidth />
+                                <Gauge percentage={pointsPercent} color={'#FFCC14'}/>
                                 <FlexColumn>
                                     <TextStyle size={18} hsize={16} color={'#000'}>{t('accumulated')}</TextStyle>
-                                    <TextStyle size={36} hsize={24} color={'#24282B'}>{numFloor(rankTotal)}</TextStyle>
+                                    <FelxText>
+                                        <TextStyle size={36} hsize={20} color={'#24282B'}>{numFloor(rankTotal)}</TextStyle>
+                                        <TextStyle size={36} hsize={20} color={'#24282B'}>/</TextStyle>
+                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>2,000,000</TextStyle>
+                                    </FelxText>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
                                         <TextStyle size={18} hsize={16} color={'#000'}>{t('your_points')}：</TextStyle>
