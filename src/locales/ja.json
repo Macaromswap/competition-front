@@ -152,5 +152,27 @@
     "sat_rules_how2_text4": "SAT を BTC に交換します。",
     "sat_rules_how2_text5": "“プール” に移動します。",
     "sat_rules_how2_text6": "SAT-wBTC ペアを選択します。",
-    "sat_rules_how2_text7": "流動性を追加します。"
+    "sat_rules_how2_text7": "流動性を追加します。",
+
+    "x文案": "",
+    "trading_vol": "取引量",
+    "x_left_title": "賞金プール1：$30000 USDT 取引件数ランキングに基づく。",
+    "x_left_text1": "この賞金プールは、10万件の取引に達した場合にのみ有効になります。",
+    "x_left_text2": "ユーザーがMacaronでX/WBTCを取引します。",
+    "x_left_text3": "金賞：$8,000",
+    "x_left_text4": "銀賞：$5,000",
+    "x_left_text5": "銅賞：$2,000",
+    "x_left_text6": "トップ4-15：各$1,000",
+    "x_left_text7": "トップ16-25：各$300",
+    "x_right_title": "賞金プール2：$10000 USDT 取引量ランキングに基づく。",
+    "x_right_text1": "この賞金プールは、合計取引量が200万ドルに達した場合にのみ有効になります。",
+    "x_right_text2": "ユーザーがMacaronでX/WBTCを取引します。",
+    "x_right_text3": "金賞：$3,000",
+    "x_right_text4": "銀賞：$2,000",
+    "x_right_text5": "銅賞：$1,000",
+    "x_right_text6": "サニー賞：5U以上のXトークンを取引し、20万枚以上のXトークンを保有しているアドレスで$4,000を均等に分け合います。",
+    "x_rules_title": "競技規則",
+    "x_rules_text1": "報酬プールは次の通りです：$30000USDTの賞金プールはX/WBTCの取引に対して、取引件数に基づくランキング（*10万件の取引後に有効）。$10000USDTの賞金プールはX/WBTCの取引量に基づくランキング（*200万ドルの取引量後に有効）。",
+    "x_rules_text2": "最低取引量の制限はありません。",
+    "x_rules_text3": "報酬は競技終了後5営業日以内に配布されます。"
 }

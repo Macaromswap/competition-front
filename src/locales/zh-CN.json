@@ -146,5 +146,27 @@
     "sat_rules_how2_text4": "将 SAT 兑换为 BTC",
     "sat_rules_how2_text5": "导航到“池子”",
     "sat_rules_how2_text6": "选择 SAT-wBTC 交易对",
-    "sat_rules_how2_text7": "添加流动性"
+    "sat_rules_how2_text7": "添加流动性",
+
+    "x文案": "",
+    "trading_vol": "Trading Volume",
+    "x_left_title": "奖池1 - 交易笔数奖池 （$30000USDT）",
+    "x_left_text1": "需要满足交易笔数tx在10万笔以上奖项生效。",
+    "x_left_text2": "用户在Macaron交易X/WBTC。",
+    "x_left_text3": "头等奖: $8,000",
+    "x_left_text4": "二等奖: $5,000",
+    "x_left_text5": "三等奖: $2,000",
+    "x_left_text6": "Top 4-15: 每人$1,000",
+    "x_left_text7": "Top 16-25: 每人$300",
+    "x_right_title": "奖池2 - 交易量奖池 （$10000USDT）",
+    "x_right_text1": "本奖池须满足总交易量达到$200万USDT以上奖项生效。",
+    "x_right_text2": "在Macaron交易X/WBTC，按照交易量排名。",
+    "x_right_text3": "头等奖: $3,000",
+    "x_right_text4": "二等奖: $2,000",
+    "x_right_text5": "三等奖: $1,000",
+    "x_right_text6": "阳光普照奖：交易5U及以上的X tokens并持有超过20万枚X tokens的地址平分$4,000 U等值的X tokens奖池。",
+    "x_rules_title": "活动规则",
+    "x_rules_text1": "本次大赛奖池设置如下：X/WBTC交易笔数奖池总计为$30000USDT（交易笔数奖池须达到10万笔TX数这一门槛后生效），X/WBTC交易量奖池为$10000USDT（X/WBTC总交易量超200万美金后生效）。 ",
+    "x_rules_text2": "所有奖项均不设置最低交易量限制。",
+    "x_rules_text3": "所有奖项将在大赛结束后5个工作日内发放完毕。"
 }
