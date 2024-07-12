@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import TableTxRank from "../../components/TableTxRank";
 import TableRank from "../../components/TableRank";
 import Tabs from "../../components/Tabs";
-import { getSwapTx, getTvlRank } from "../../api";
+import { getSwapRank, getSwapTx } from "../../api";
 import { useNetworkStore } from "../../store";
 import { formatTime } from "../../utils/date";
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ import tokenImg from "../../assets/img/tokenImg.png";
 import tokenImgh5 from "../../assets/img/tokenImgh5.png";
 import jointlyImg from "../../assets/img/jointlyImg.png";
 import { formattedNumber, numFloor } from "../../utils/numbers.js";
-import { satStartCountdown, satEndCountdown, satTime } from "../../utils/activity.js";
+import { xStartCountdown, xEndCountdown, xTime } from "../../utils/activity.js";
 import LeftTooltip from "./components/LeftTooltip";
 import RightTooltip from "./components/RightTooltip";
 import Gauge from "../../components/Gauge";
@@ -325,17 +325,17 @@ function Home() {
     const handleTabClick = (index) => {
         setActiveTab(index);
     }
-    const allList = (txParams, tvlParams) => {
-        getTvlRank(activeNetwork, tvlParams).then((res) => {
-            const {list, total_points, current} = res.data
+    const allList = (params) => {
+        getSwapRank(activeNetwork, params).then((res) => {
+            const {list, total, current} = res.data
             setRankData(list)
-            const total = total_points || 0
-            const pointPerc = total / 2000000 * 100
+            const rankTotal = total || 0
+            const pointPerc = rankTotal / 2000000 * 100
             setPointsPercent(pointPerc)
             setRankTotal(total)
             setRankCurrent(current)
         })
-        getSwapTx(activeNetwork, txParams).then(res => {
+        getSwapTx(activeNetwork, params).then(res => {
             const {list, total, current} = res.data
             setTxData(list)
             const txtotal = total || 0
@@ -346,25 +346,19 @@ function Home() {
         })
     }
     useEffect(() => {
-        const txParams = {
-            start_time: satTime[0],
-            end_time: satTime[1],
+        const params = {
+            start_time: xTime[0],
+            end_time: xTime[1],
             limit: 200,
-            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
-        }
-        const tvlParams = {
-            limit: 200,
-            activity_name: 'p-0619',
-            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
+            pair_address: "0x9b6874b75a7fb169042029e96159566b4bc8a195"
         }
         if(userAddress){
-            txParams.wallet_address= userAddress
-            tvlParams.wallet_address= userAddress
+            params.wallet_address= userAddress
         }
-        allList(txParams, tvlParams)
+        allList(params)
         const timer = setInterval(() => {
-            if (txParams.end_time > Date.now()) {
-                allList(txParams, tvlParams)
+            if (params.end_time > Date.now()) {
+                allList(params)
             } else{
                 clearInterval(timer)
             }
@@ -412,7 +406,7 @@ function Home() {
                             </TextStyle>
                         </Title>
                         <BtnStyle>
-                            <Countdown endDate={satEndCountdown} startDate={satStartCountdown}/>
+                            <Countdown endDate={xEndCountdown} startDate={xStartCountdown}/>
                             <BtnTg>
                                 <SwapNow onClick={() => swapNow()}>
                                     <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
@@ -477,7 +471,7 @@ function Home() {
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
                                         <TextStyle size={18} hsize={16} color={'#000'}>{t('your_volume')}：</TextStyle>
-                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{numFloor(rankCurrent?.points || 0)}</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>${numFloor(rankCurrent?.swap_amount || 0)}</TextStyle>
                                     </FlexVolume>
                                 </FlexColumn>
                             </AnalysisBox>
