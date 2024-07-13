@@ -14,8 +14,8 @@ import satRight from '../../assets/img/satRight.svg'
 import staricon from "../../assets/img/staricon.png";
 import question from "../../assets/img/question.png";
 import telegram from "../../assets/img/telegram.png";
-import satBackgroundImg from "../../assets/img/satBackgroundImg.png";
-import satBackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
+import BackgroundImg from "../../assets/img/satBackgroundImg.png";
+import BackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
 import tokenImg from "../../assets/img/tokenImg.png";
 import tokenImgh5 from "../../assets/img/tokenImgh5.png";
 import jointlyImg from "../../assets/img/jointlyImg.png";
@@ -35,7 +35,7 @@ import { ReactComponent as XRight } from '../../assets/img/xRight.svg'
 const PageBg = styled.div`
     height: 100%;
     background: #F3FFCF;
-    background-image: url(${satBackgroundImg});
+    background-image: url(${BackgroundImg});
     background-position: top center;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -43,7 +43,7 @@ const PageBg = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     @media screen and (max-width: 600px) {
-        background-image: url(${satBackgroundImgH5});
+        background-image: url(${BackgroundImgH5});
         background-position: bottom left;
         background-size: 100% auto;
     }
@@ -418,8 +418,8 @@ function Home() {
                             </Rules>
                         </BtnStyle>
                         <MacaronBaby>
-                            <LeftimgIcon src={satLeft} />
-                            <RightimgIcon src={satRight} />
+                            <LeftimgIcon />
+                            <RightimgIcon />
                         </MacaronBaby>
                     </MiddlePart>
                     <PopUp open={isOpen} closeModal={closeModal} type={type}/>
@@ -453,7 +453,7 @@ function Home() {
                         </LeftTable>
                         <RightTable className={activeTab === 2? 'open':'close'}>
                             <FelxTextStyle>
-                                <TextStyle size={20} hsize={16} color={'#24282B'}>{t('sat-split')}</TextStyle>
+                                <TextStyle size={20} hsize={16} color={'#24282B'}>{t('reach')}</TextStyle>
                                 <TextStyle size={36} hsize={24} color={'#E27625'}>$10000</TextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>USDT</TextStyle>
                                 <RightTooltip/>
