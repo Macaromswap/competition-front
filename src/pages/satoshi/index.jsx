@@ -426,7 +426,7 @@ function Home() {
                                 <SwapNow onClick={() => goLink('getSat')}>
                                     <TextStyle size={20} color={'#24282B'}>{t('get_sat')}</TextStyle>
                                 </SwapNow>
-                                <TgImg src={telegram} onClick={() => goLink('satTgLink')} />
+                                <TgImg src={telegram} onClick={() => goLink('tgLink')} />
                             </BtnTg>
                             <Rules onClick={() => openModal(1)}>
                                 <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>

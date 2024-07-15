@@ -411,7 +411,7 @@ function Home() {
                                 <SwapNow onClick={() => swapNow()}>
                                     <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
                                 </SwapNow>
-                                <TgImg src={telegram} onClick={() => goLink('satTgLink')} />
+                                <TgImg src={telegram} onClick={() => goLink('tgLink')} />
                             </BtnTg>
                             <Rules onClick={() => openModal(1)}>
                                 <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
