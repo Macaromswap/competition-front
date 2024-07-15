@@ -84,10 +84,8 @@ const links = {
     'token': 'https://info.macaron.biz/#/tokens',
     'tgLink': 'https://t.me/Macaron_Riders',
     'getSat': ' https://lihi.cc/yOuj3',
-    'satTgLink': 'https://t.me/Macaron_Riders',
     'howGetSat': 'https://youtu.be/__IsmvhLN8I?t=42',
     'howSwapSat': 'https://youtu.be/pUvQUXs7gIs?t=15',
-    'xTgLink': ''
 }
 
 export function goLink(text) {
