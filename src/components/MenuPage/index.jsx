@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { toMacaronRoute, toMacaronInfo } from "../../utils";
 import satoshi from '../../assets/img/satoshi.png'
 import cbd from '../../assets/img/cbd.png'
+import runesx from '../../assets/img/runesx.png'
 
 const MenuBar = styled.div`
     width: 100vw;
@@ -160,18 +161,24 @@ function MenuPage({handleClick}) {
                         <TextStyle color={'#fff'} size={20}>{t('competition')}</TextStyle>
                     </StyledNavLink>
                     <CompetitionMenu>
+                        <RouterNavLink to='/runesx'>
+                            <IconBox>
+                                <LogoIcon src={runesx} />
+                            </IconBox>
+                            <TextStyle color={'#24282B'} size={18}><span>RunesX</span></TextStyle>
+                        </RouterNavLink>
                         <RouterNavLink to='/satoshi' exact>
                             <IconBox>
                                 <LogoIcon src={satoshi} />
                             </IconBox>
                             <TextStyle color={'#24282B'} size={18}><span>Satoshi</span></TextStyle>
                         </RouterNavLink>
-                        <RouterNavLink to='/cbd'>
+                        {/* <RouterNavLink to='/cbd'>
                             <IconBox>
                                 <LogoIcon src={cbd} />
                             </IconBox>
                             <TextStyle color={'#24282B'} size={18}><span>CBD</span></TextStyle>
-                        </RouterNavLink>
+                        </RouterNavLink> */}
                     </CompetitionMenu>
                 </NavList>
             </TopBox>

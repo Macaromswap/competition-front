@@ -17,6 +17,7 @@ import menuBox from '../../assets/img/menuBox.png'
 import lorenzo from '../../assets/img/lorenzo.png'
 import satoshi from '../../assets/img/satoshi.png'
 import cbd from '../../assets/img/cbd.png'
+import runesx from '../../assets/img/runesx.png'
 
 const Wrapper = styled.div`
     display: flex;
@@ -352,17 +353,17 @@ function Menu() {
                             <TextStyle color={'#fff'} size={16}>{t('competition')}</TextStyle>
                         </span>
                         {showCompt && <CompetitionMenu ref={refCompt}>
+                            <RouterNavLink to='/runesx'>
+                                <IconBox>
+                                    <LogoIcon src={runesx} />
+                                </IconBox>
+                                <TextStyle color={'#24282B'} size={16}><span>RunesX</span></TextStyle>
+                            </RouterNavLink>
                             <RouterNavLink to='/satoshi'>
                                 <IconBox>
                                     <LogoIcon src={satoshi} />
                                 </IconBox>
                                 <TextStyle color={'#24282B'} size={16}><span>Satoshi</span></TextStyle>
-                            </RouterNavLink>
-                            <RouterNavLink to='/cbd'>
-                                <IconBox>
-                                    <LogoIcon src={cbd} />
-                                </IconBox>
-                                <TextStyle color={'#24282B'} size={16}><span>CBD</span></TextStyle>
                             </RouterNavLink>
                             {/* <ComptMenu onClick={() => navigate('/lorenzo')}>
                                 <IconBox>
