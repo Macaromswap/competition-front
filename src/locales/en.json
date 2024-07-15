@@ -155,5 +155,27 @@
     "sat_rules_how2_text4": "Swap SAT for BTC.",
     "sat_rules_how2_text5": "Navigate to “Pool”.",
     "sat_rules_how2_text6": "Select the SAT-wBTC pair.",
-    "sat_rules_how2_text7": "Add liquidity."
+    "sat_rules_how2_text7": "Add liquidity.",
+
+    "x文案": "",
+    "trading_vol": "Total Trading Volume",
+    "x_left_title": "Prize Pool 1: $30000 USDT based on TX Number rankings.",
+    "x_left_text1": "This prize pool ONLY becomes valid after reaching the threshold of 100000 TXs.",
+    "x_left_text2": "Users trade X/WBTC on Macaron.",
+    "x_left_text3": "Gold Prize: $8,000",
+    "x_left_text4": "Silver Prize: $5,000",
+    "x_left_text5": "Bronze Prize: $2,000",
+    "x_left_text6": "Top 4-15: $1,000 for each winner",
+    "x_left_text7": "Top 16-25: $300 for each winner",
+    "x_right_title": "Prize Pool 2: $10000 USDT based on rankings of trading volume.",
+    "x_right_text1": "This prize pool ONLY becomes valid after reaching the threshold of a total trading volume of $2M.",
+    "x_right_text2": "Users trade X/WBTC on Macaron.",
+    "x_right_text3": "Gold Prize: $3,000",
+    "x_right_text4": "Silver Prize: $2,000",
+    "x_right_text5": "Bronze Prize: $1,000",
+    "x_right_text6": "Sunny awards: addresses with trading X tokens for 5U and more AND holding at least 200,000 X tokens will equally split $4,000.",
+    "x_rules_title": "Competition Rules",
+    "x_rules_text1": "The reward pools are: $30000USDT Prize Pool for trading X/WBTC, with rankings based on TX numbers (*prize pool valid after reaching the TX threshold of 100K). $10000USDT Prize Pool with rankings based on trading volumes of X/WBTC (* prize pool valid after reaching the total trading volume of $2M). ",
+    "x_rules_text2": "There is no minimum trading volume limit. ",
+    "x_rules_text3": "Rewards will be distributed within 5 working days after the end of the competition. "
 }

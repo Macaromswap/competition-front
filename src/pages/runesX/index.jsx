@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import TablePointsRank from "../../components/TablePointsRank";
 import TableTxRank from "../../components/TableTxRank";
+import TableRank from "../../components/TableRank";
 import Tabs from "../../components/Tabs";
-import { getSwapTx, getTvlRank } from "../../api";
+import { getSwapRank, getSwapTx } from "../../api";
 import { useNetworkStore } from "../../store";
 import { formatTime } from "../../utils/date";
 import { useTranslation } from 'react-i18next';
@@ -14,33 +14,28 @@ import satRight from '../../assets/img/satRight.svg'
 import staricon from "../../assets/img/staricon.png";
 import question from "../../assets/img/question.png";
 import telegram from "../../assets/img/telegram.png";
-import satBackgroundImg from "../../assets/img/satBackgroundImg.png";
-import satBackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
+import BackgroundImg from "../../assets/img/satBackgroundImg.png";
+import BackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
 import tokenImg from "../../assets/img/tokenImg.png";
 import tokenImgh5 from "../../assets/img/tokenImgh5.png";
-import banner1 from "../../assets/img/banner1.png";
-import banner2 from "../../assets/img/banner2.png";
-import banner1h5 from "../../assets/img/banner1h5.png";
-import banner2h5 from "../../assets/img/banner2h5.png";
-import banner1Left from "../../assets/img/banner1Left.png";
-import banner1Right from "../../assets/img/banner1Right.png";
-import banner2Left from "../../assets/img/banner2Left.png";
-import banner2Right from "../../assets/img/banner2Right.png";
+import jointlyImg from "../../assets/img/jointlyImg.png";
 import { formattedNumber, numFloor } from "../../utils/numbers.js";
-import { satStartCountdown, satEndCountdown, satTime } from "../../utils/activity.js";
+import { xStartCountdown, xEndCountdown, xTime } from "../../utils/activity.js";
 import LeftTooltip from "./components/LeftTooltip";
 import RightTooltip from "./components/RightTooltip";
 import Gauge from "../../components/Gauge";
-import PopUp from "../../components/SatPopUp";
+import PopUp from "./components/PopUp";
 import Countdown from "../../components/Countdown";
 import { toMacaronRoute, goLink } from "../../utils";
 import Menu from '../../components/Menu'
 import PageBottom from "../../components/PageBottom";
+import { ReactComponent as XLeft } from '../../assets/img/xLeft.svg'
+import { ReactComponent as XRight } from '../../assets/img/xRight.svg'
 
 const PageBg = styled.div`
     height: 100%;
     background: #F3FFCF;
-    background-image: url(${satBackgroundImg});
+    background-image: url(${BackgroundImg});
     background-position: top center;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -48,7 +43,7 @@ const PageBg = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     @media screen and (max-width: 600px) {
-        background-image: url(${satBackgroundImgH5});
+        background-image: url(${BackgroundImgH5});
         background-position: bottom left;
         background-size: 100% auto;
     }
@@ -59,29 +54,26 @@ const PageWidth = styled.div`
     padding: 0px 16px;
 `
 const Wrapper = styled.div`
-    padding: 48px 0 60px;
+    padding: 0 0 60px;
     @media screen and (max-width: 860px) {
-        padding: 40px 0 76px;
+        padding: 0 0 76px;
     }
 `
 const MiddlePart = styled.div`
     background-image: url(${tokenImg});
-    background-size: auto 92%;
+    background-size: auto 90%;
     background-position: top center;
     background-repeat: no-repeat;
     position: relative;
+    margin-bottom: 30px;
     @media screen and (max-width: 690px) {
         background-image: url(${tokenImgh5});
         background-size: 100% auto;
-        margin-bottom: 10px;
     }
 `
 const Title = styled.div`
     text-align: center;
-    margin-bottom:44px;
-    @media screen and (max-width: 690px) {
-        text-align: left;
-    }
+    margin-bottom:30px;
     div{
         &:nth-child(1) {
             margin-bottom: 10px;
@@ -243,30 +235,39 @@ const TgImg = styled.img`
     cursor: pointer;
     border-radius: 50px;
 `
-const LeftimgIcon = styled.img`
-    position: absolute;
-    bottom: 0;
-    left: -16px;
+const MacaronBaby = styled.div`
     @media screen and (max-width: 690px) {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 6px;
     }
 `
-const RightimgIcon = styled.img`
+const LeftimgIcon = styled(XLeft)`
     position: absolute;
-    bottom: 0;
-    right: -26px;
+    bottom: 50%;
+    left: -18px;
+    transform: translateY(66%);
     @media screen and (max-width: 690px) {
-        display: none;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        width: 124px;
+        height: 80px;
     }
 `
-const BannerBox = styled.div`
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin: 18px 0 42px;
-    @media screen and (max-width: 790px) {
-        flex-direction: column;
-        margin: 30px 0 50px;
+const RightimgIcon = styled(XRight)`
+    position: absolute;
+    bottom: 50%;
+    right: 0;
+    transform: translateY(50%);
+    @media screen and (max-width: 690px) {
+        position: relative;
+        bottom: 0;
+        transform: none;
+        width: 86px;
+        height: 75px;
     }
 `
 const Banners = styled.div`
@@ -287,36 +288,19 @@ const Banners = styled.div`
         height: 80px;
     }
 `
-const LeftBanner = styled(Banners)`
-     background-image: url(${banner1});
-     @media screen and (max-width: 690px) {
-        background-image: url(${banner1h5});
+const JointlyBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    padding-top: 43px;
+    @media screen and (max-width: 860px) {
+        padding-top: 40px;
     }
 `
-const RightBanner = styled(Banners)`
-     background-image: url(${banner2});
-     @media screen and (max-width: 690px) {
-        background-image: url(${banner2h5});
-    }
-`
-const BannerText = styled.div`
-    padding-top: 12px;
-    text-align: center;
-    position: relative;
-    z-index: 99;
-    text-wrap: nowrap;
-`
-const IconPositionLeft = styled.img`
-    height: 100%;
-    position: absolute;
-    left: 6px;
-    top: 0;
-`
-const IconPositionRight = styled.img`
-    height: 100%;
-    position: absolute;
-    right: 6px;
-    top: 0;
+const JointlyImgStyle = styled.img`
+    width: auto;
+    height: 30px;
 `
 
 function Home() {
@@ -336,51 +320,45 @@ function Home() {
 
     const tabItems = [
         { label: t('trans_number'), index: 1 },
-        { label: t('add_liquidity'), index: 2 },
+        { label: t('tr_vol'), index: 2 },
     ]
     const handleTabClick = (index) => {
         setActiveTab(index);
     }
-    const allList = (txParams, tvlParams) => {
-        getTvlRank(activeNetwork, tvlParams).then((res) => {
-            const {list, total_points, current} = res.data
+    const allList = (params) => {
+        getSwapRank(activeNetwork, params).then((res) => {
+            const {list, total, current} = res.data
             setRankData(list)
-            const total = total_points || 0
-            const pointPerc = total / 2000000 * 100
+            const rankTotal = total || 0
+            const pointPerc = rankTotal / 2000000 * 100
             setPointsPercent(pointPerc)
             setRankTotal(total)
             setRankCurrent(current)
         })
-        getSwapTx(activeNetwork, txParams).then(res => {
+        getSwapTx(activeNetwork, params).then(res => {
             const {list, total, current} = res.data
             setTxData(list)
             const txtotal = total || 0
-            const perc = txtotal / 80000 * 100
+            const perc = txtotal / 100000 * 100
             setPercent(perc)
             setTxTotal(txtotal)
             setTxCurrent(current)
         })
     }
     useEffect(() => {
-        const txParams = {
-            start_time: satTime[0],
-            end_time: satTime[1],
+        const params = {
+            start_time: xTime[0],
+            end_time: xTime[1],
             limit: 200,
-            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
-        }
-        const tvlParams = {
-            limit: 200,
-            activity_name: 'p-0619',
-            pair_address: "0x575212a8763db6bbaf67461440246546d4017707", // 0x575212a8763db6bbaf67461440246546d4017707
+            pair_address: "0x9b6874b75a7fb169042029e96159566b4bc8a195"
         }
         if(userAddress){
-            txParams.wallet_address= userAddress
-            tvlParams.wallet_address= userAddress
+            params.wallet_address= userAddress
         }
-        allList(txParams, tvlParams)
+        allList(params)
         const timer = setInterval(() => {
-            if (txParams.end_time > Date.now()) {
-                allList(txParams, tvlParams)
+            if (params.end_time > Date.now()) {
+                allList(params)
             } else{
                 clearInterval(timer)
             }
@@ -394,6 +372,10 @@ function Home() {
     }
     const closeModal = () => {
         setIsOpen(false)
+    }
+    const swapNow = () => {
+        const route = `/swap?inputCurrency=0xfdd3173d2c3defa7a3ac6c08ad0f03dc9eceb230&outputCurrency=0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f `
+        toMacaronRoute(route)
     }
     const bannerLeftClick = () => {
         const route = `/swap?inputCurrency=0xa1e63cb2ce698cfd3c2ac6704813e3b870fedadf&outputCurrency=0xff204e2681a6fa0e2c3fade68a1b28fb90e4fc5f`
@@ -410,21 +392,24 @@ function Home() {
                 <Menu/>
                 <Wrapper>
                     <MiddlePart>
+                        <JointlyBox>
+                            <JointlyImgStyle src={jointlyImg} />
+                        </JointlyBox>
                         <Title>
                             <TextStyle size={56} hsize={34} color={'#24282B'}>
-                                <span className={'yellow2'}>SAT</span> {t('trading_competition')}
+                                <span className={'yellow2'}>X</span> {t('trading_competition')}
                             </TextStyle>
                             <TextStyle size={24} hsize={14} color={'#24282B'}>
                                 {t('trade_to_split')} [
-                                    <span className={'orange'}> $60,000 USDT </span>
+                                    <span className={'orange'}> $40,000 USDT </span>
                                 ] 
                             </TextStyle>
                         </Title>
                         <BtnStyle>
-                            <Countdown endDate={satEndCountdown} startDate={satStartCountdown}/>
+                            <Countdown endDate={xEndCountdown} startDate={xStartCountdown}/>
                             <BtnTg>
-                                <SwapNow onClick={() => goLink('getSat')}>
-                                    <TextStyle size={20} color={'#24282B'}>{t('get_sat')}</TextStyle>
+                                <SwapNow onClick={() => swapNow()}>
+                                    <TextStyle size={20} color={'#24282B'}>{t('swap_now')}</TextStyle>
                                 </SwapNow>
                                 <TgImg src={telegram} onClick={() => goLink('tgLink')} />
                             </BtnTg>
@@ -432,32 +417,18 @@ function Home() {
                                 <TextStyle size={14} color={'#6A6969'}>{t('view_rules')}</TextStyle>
                             </Rules>
                         </BtnStyle>
-                        <LeftimgIcon src={satLeft} />
-                        <RightimgIcon src={satRight} />
+                        <MacaronBaby>
+                            <LeftimgIcon />
+                            <RightimgIcon />
+                        </MacaronBaby>
                     </MiddlePart>
                     <PopUp open={isOpen} closeModal={closeModal} type={type}/>
-                    <BannerBox>
-                        <LeftBanner onClick={bannerLeftClick}>
-                            <IconPositionLeft src={banner1Left} />
-                            <BannerText>
-                                <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('swap_sat')}</TextStyle>
-                            </BannerText>
-                            <IconPositionRight src={banner1Right} />
-                        </LeftBanner>
-                        <RightBanner onClick={bannerRightClick}>
-                            <IconPositionLeft src={banner2Left} />
-                            <BannerText>
-                                <TextStyle size={32} hsize={18} color={'#FEFEFE'}>{t('add_sat')}</TextStyle>
-                            </BannerText>
-                            <IconPositionRight src={banner2Right} />
-                        </RightBanner>
-                    </BannerBox>
                     <Tabs activeTab={activeTab} onTabClick={handleTabClick} tabItems={tabItems} />
                     <TableBox>
                         <LeftTable className={activeTab === 1? 'open':'close'}>
                             <FelxTextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>{t('reach')}</TextStyle>
-                                <TextStyle size={36} hsize={24} color={'#E27625'}>$40000</TextStyle>
+                                <TextStyle size={36} hsize={24} color={'#E27625'}>$30000</TextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>USDT</TextStyle>
                                 <LeftTooltip />
                                 <Image src={question}  onClick={() => openModal(2)}/>
@@ -469,7 +440,7 @@ function Home() {
                                     <FelxText>
                                         <TextStyle size={36} hsize={20} color={'#000'}>{formattedNumber(txTotal)}</TextStyle>
                                         <TextStyle size={36} hsize={20} color={'#000'}>/</TextStyle>
-                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>80,000</TextStyle>
+                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>100,000</TextStyle>
                                     </FelxText>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
@@ -482,8 +453,8 @@ function Home() {
                         </LeftTable>
                         <RightTable className={activeTab === 2? 'open':'close'}>
                             <FelxTextStyle>
-                                <TextStyle size={20} hsize={16} color={'#24282B'}>{t('sat-split')}</TextStyle>
-                                <TextStyle size={36} hsize={24} color={'#E27625'}>$20000</TextStyle>
+                                <TextStyle size={20} hsize={16} color={'#24282B'}>{t('reach')}</TextStyle>
+                                <TextStyle size={36} hsize={24} color={'#E27625'}>$10000</TextStyle>
                                 <TextStyle size={20} hsize={16} color={'#24282B'}>USDT</TextStyle>
                                 <RightTooltip/>
                                 <Image src={question}  onClick={() => openModal(3)}/>
@@ -491,20 +462,20 @@ function Home() {
                             <AnalysisBox>
                                 <Gauge percentage={pointsPercent} color={'#FFCC14'}/>
                                 <FlexColumn>
-                                    <TextStyle size={18} hsize={16} color={'#000'}>{t('accumulated')}</TextStyle>
+                                    <TextStyle size={18} hsize={16} color={'#000'}>{t('trading_vol')}</TextStyle>
                                     <FelxText>
-                                        <TextStyle size={36} hsize={20} color={'#24282B'}>{numFloor(rankTotal)}</TextStyle>
+                                        <TextStyle size={36} hsize={20} color={'#24282B'}>$ {numFloor(rankTotal)}</TextStyle>
                                         <TextStyle size={36} hsize={20} color={'#24282B'}>/</TextStyle>
-                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>2,000,000</TextStyle>
+                                        <TextStyle size={20} hsize={15} color={'#6A6969'}>$2,000,000</TextStyle>
                                     </FelxText>
                                     <FlexVolume>
                                         <ImgStar src={staricon} />
-                                        <TextStyle size={18} hsize={16} color={'#000'}>{t('your_points')}：</TextStyle>
-                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>{numFloor(rankCurrent?.points || 0)}</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#000'}>{t('your_volume')}：</TextStyle>
+                                        <TextStyle size={18} hsize={16} color={'#2C9F22'}>${numFloor(rankCurrent?.swap_amount || 0)}</TextStyle>
                                     </FlexVolume>
                                 </FlexColumn>
                             </AnalysisBox>
-                            <TablePointsRank data={rankData} meData={rankCurrent} volName={'tvl_added'}></TablePointsRank>
+                            <TableRank data={rankData} meData={rankCurrent}></TableRank>
                         </RightTable>
                     </TableBox>
                 </Wrapper>

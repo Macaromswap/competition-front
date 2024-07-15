@@ -152,5 +152,27 @@
     "sat_rules_how2_text4": "Trao đổi SAT lấy BTC.",
     "sat_rules_how2_text5": "Đi tới “Hồ”.",
     "sat_rules_how2_text6": "Chọn cặp SAT-wBTC.",
-    "sat_rules_how2_text7": "Thêm thanh khoản."
+    "sat_rules_how2_text7": "Thêm thanh khoản.",
+
+    "x文案": "",
+    "trading_vol": "Khối lượng giao dịch",
+    "x_left_title": "Quỹ giải thưởng 1 - Quỹ số lượng giao dịch ($30000USDT)",
+    "x_left_text1": "Cần đạt được số lượng giao dịch tx trên 100,000 giao dịch để giải thưởng có hiệu lực.",
+    "x_left_text2": "Người dùng giao dịch X/WBTC trên Macaron.",
+    "x_left_text3": "Giải nhất: $8,000",
+    "x_left_text4": "Giải nhì: $5,000",
+    "x_left_text5": "Giải ba: $2,000",
+    "x_left_text6": "Top 4-15: Mỗi người $1,000",
+    "x_left_text7": "Top 16-25: Mỗi người $300",
+    "x_right_title": "Quỹ giải thưởng 2 - Quỹ khối lượng giao dịch ($10000USDT)",
+    "x_right_text1": "Quỹ này yêu cầu tổng khối lượng giao dịch đạt trên $2,000,000 USDT để giải thưởng có hiệu lực.",
+    "x_right_text2": "Giao dịch X/WBTC trên Macaron, xếp hạng theo khối lượng giao dịch.",
+    "x_right_text3": "Giải nhất: $3,000",
+    "x_right_text4": "Giải nhì: $2,000",
+    "x_right_text5": "Giải ba: $1,000",
+    "x_right_text6": "Giải thưởng mặt trời chiếu sáng: Các địa chỉ giao dịch ít nhất 5U X tokens và nắm giữ trên 200,000 X tokens sẽ chia đều $4,000 U tương đương với quỹ giải thưởng X tokens.",
+    "x_rules_title": "Quy tắc sự kiện",
+    "x_rules_text1": "Quỹ giải thưởng của cuộc thi lần này được thiết lập như sau: Quỹ số lượng giao dịch X/WBTC tổng cộng là $30,000 USDT (quỹ số lượng giao dịch yêu cầu đạt 100,000 giao dịch TX để có hiệu lực), quỹ khối lượng giao dịch X/WBTC là $10,000 USDT (khối lượng giao dịch tổng cộng của X/WBTC vượt quá 2 triệu USD để có hiệu lực).",
+    "x_rules_text2": "Tất cả các giải thưởng đều không đặt ra hạn chế về khối lượng giao dịch tối thiểu.",
+    "x_rules_text3": "Tất cả các giải thưởng sẽ được phát hành trong vòng 5 ngày làm việc sau khi cuộc thi kết thúc."
 }
