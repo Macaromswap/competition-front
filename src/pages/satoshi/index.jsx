@@ -343,22 +343,26 @@ function Home() {
     }
     const allList = (txParams, tvlParams) => {
         getTvlRank(activeNetwork, tvlParams).then((res) => {
-            const {list, total_points, current} = res.data
-            setRankData(list)
-            const total = total_points || 0
-            const pointPerc = total / 2000000 * 100
-            setPointsPercent(pointPerc)
-            setRankTotal(total)
-            setRankCurrent(current)
+            if (res.code === 1) {
+                const {list, total_points, current} = res.data
+                setRankData(list)
+                const total = total_points || 0
+                const pointPerc = total / 2000000 * 100
+                setPointsPercent(pointPerc)
+                setRankTotal(total)
+                setRankCurrent(current)
+            }
         })
         getSwapTx(activeNetwork, txParams).then(res => {
-            const {list, total, current} = res.data
-            setTxData(list)
-            const txtotal = total || 0
-            const perc = txtotal / 80000 * 100
-            setPercent(perc)
-            setTxTotal(txtotal)
-            setTxCurrent(current)
+            if (res.code === 1) {
+                const {list, total, current} = res.data
+                setTxData(list)
+                const txtotal = total || 0
+                const perc = txtotal / 80000 * 100
+                setPercent(perc)
+                setTxTotal(txtotal)
+                setTxCurrent(current)
+            }
         })
     }
     useEffect(() => {

@@ -327,22 +327,26 @@ function Home() {
     }
     const allList = (params) => {
         getSwapRank(activeNetwork, params).then((res) => {
-            const {list, total, current} = res.data
-            setRankData(list)
-            const rankTotal = total || 0
-            const pointPerc = rankTotal / 2000000 * 100
-            setPointsPercent(pointPerc)
-            setRankTotal(total)
-            setRankCurrent(current)
+            if (res.code === 1) {
+                const {list, total, current} = res.data
+                setRankData(list)
+                const rankTotal = total || 0
+                const pointPerc = rankTotal / 2000000 * 100
+                setPointsPercent(pointPerc)
+                setRankTotal(total)
+                setRankCurrent(current)
+            }
         })
         getSwapTx(activeNetwork, params).then(res => {
-            const {list, total, current} = res.data
-            setTxData(list)
-            const txtotal = total || 0
-            const perc = txtotal / 100000 * 100
-            setPercent(perc)
-            setTxTotal(txtotal)
-            setTxCurrent(current)
+            if (res.code === 1) {
+                const {list, total, current} = res.data
+                setTxData(list)
+                const txtotal = total || 0
+                const perc = txtotal / 100000 * 100
+                setPercent(perc)
+                setTxTotal(txtotal)
+                setTxCurrent(current)
+            }
         })
     }
     useEffect(() => {
