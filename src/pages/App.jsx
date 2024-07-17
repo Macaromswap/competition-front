@@ -4,6 +4,7 @@ import { Routes, Route, NavLink, useLocation, useNavigate, useParams } from 'rea
 import { usePoolStore, useNetworkStore } from "../store";
 import styled from 'styled-components'
 import CBD from './cbd'
+import Home from './home'
 import RunesX from './runesX'
 import Lorenzo from './lorenzo'
 import Satoshi from './satoshi'
@@ -45,7 +46,7 @@ function App() {
   	return (
     	<div className="App">
     	    <Routes>
-    	      	<Route path="/" element={<RunesX />} />
+    	      	<Route path="/" element={<Home />} />
     	      	<Route path="/satoshi" element={<Satoshi />} />
     	      	<Route path="/runesx" element={<RunesX />}/>
     	      	<Route path="/cbd" element={<CBD />}/>
