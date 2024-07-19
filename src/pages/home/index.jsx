@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import { useNetworkStore } from "../../store";
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getSwapTx, getSwapRank } from "../../api";
 import { TextStyle } from '../../components/Text/TextCss'
+import { formattedNumber, numFloor } from "../../utils/numbers.js";
 import xLeft from '../../assets/img/xLeft.svg'
 import xRight from '../../assets/img/xRight.svg'
 import data1 from '../../assets/img/data1.svg'
 import data2 from '../../assets/img/data2.svg'
 import data3 from '../../assets/img/data3.svg'
 import homebg from "../../assets/img/homebg.png";
-import satBackgroundImgH5 from "../../assets/img/satBackgroundImgH5.png";
+import homebgH5 from "../../assets/img/homebgH5.png";
 import tokenImg2 from "../../assets/img/tokenImg2.png";
-import tokenImgh5 from "../../assets/img/tokenImgh5.png";
+import tokenImg2h5 from "../../assets/img/tokenImg2h5.png";
+import activityList from "../../assets/json/activity.json";
 import Menu from '../../components/Menu'
 import PageBottom from "../../components/PageBottom";
 import GaugeMini from "../../components/GaugeMini";
 import CountdownMini from "../../components/CountdownMini";
+import { Skeleton } from "../../components/Skeleton";
 
 const PageBg = styled.div`
     height: 100%;
@@ -29,8 +33,8 @@ const PageBg = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     @media screen and (max-width: 600px) {
-        background-image: url(${satBackgroundImgH5});
-        background-position: bottom left;
+        background-image: url(${homebgH5});
+        background-position-y: 120px;
         background-size: 100% auto;
     }
 `
@@ -53,16 +57,15 @@ const MiddlePart = styled.div`
     position: relative;
     padding: 90px 0 116px;
     @media screen and (max-width: 690px) {
-        background-image: url(${tokenImgh5});
+        background-image: url(${tokenImg2h5});
         background-size: 100% auto;
-        margin-bottom: 10px;
-        padding: 40px 0 32px;
+        padding: 40px 0 20px;
     }
 `
 const Title = styled.div`
     text-align: center;
     @media screen and (max-width: 690px) {
-        text-align: left;
+        margin-bottom: 12px;
     }
 `
 
@@ -72,7 +75,11 @@ const LeftimgIcon = styled.img`
     left: -16px;
     transform: translateY(50%);
     @media screen and (max-width: 690px) {
-        display: none;
+        height: 80px;
+        position: relative;
+        transform: none;
+        bottom: 0;
+        left: 0;
     }
 `
 const RightimgIcon = styled.img`
@@ -81,14 +88,21 @@ const RightimgIcon = styled.img`
     right: 0;
     transform: translateY(50%);
     @media screen and (max-width: 690px) {
-        display: none;
+        height: 80px;
+        transform: none;
+        bottom: 24px;
     }
 `
 const DataBox = styled.div`
     display: flex;
     gap: 30px;
+    flex-wrap: wrap;
+    @media screen and (max-width: 690px) {
+        gap: 16px;
+    }
 `
 const DataStyle = styled.div`
+    min-width: 300px;
     flex: 1;
     display: flex;
     padding: 20px 30px;
@@ -98,10 +112,16 @@ const DataStyle = styled.div`
     border: 2px solid var(--Text-heading, #000);
     background: #FFF;
     box-shadow: 4px 4px 0px 0px #000;
+    box-sizing: border-box;
+    @media screen and (max-width: 690px) {
+        min-width: 100%;
+        padding: 12px 20px;
+    }
 `
 const DataImg = styled.img`
     width: ${(props) => props.w + 'px'};
     height: ${(props) => props.h + 'px'};
+    border-radius: 9999px;
     @media screen and (max-width: 600px) {
         width: ${(props) => props.hw + 'px'};
         height: ${(props) => props.hh + 'px'};
@@ -165,12 +185,17 @@ const ProjectName = styled.div`
 `
 const ProjectNameTime = styled(ProjectName)`
     width: auto;
+    @media screen and (max-width: 690px) {
+        width: 100%;
+        justify-content: space-between;
+    }
 `
 const CalendarBox = styled.div`
     text-wrap: nowrap;
+    text-align: center;
     @media screen and (max-width: 600px) {
         position: absolute;
-        top: 84px;
+        top: 19%;
         right: 20px;
     }
 `
@@ -212,6 +237,7 @@ const Ongoing = styled(Border)`
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    cursor: pointer;
 `
 const OngoingIn = styled.div`
     width: 100%;
@@ -229,13 +255,14 @@ const RightWidth = styled.div`
 `
 const EndList = styled.div`
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
 `
 const Ended = styled(Border)`
     width: 48.5%;
     margin-bottom:30px;
+    cursor: pointer;
     @media screen and (max-width: 750px) {
         width: 100%;
         margin-bottom:20px;
@@ -266,9 +293,131 @@ const TextBott = styled.div`
     
 function Home() {
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
     const { activeNetwork, userAddress } = useNetworkStore()
-    const qqq = 'trading_competition'
+    const [coming, setComing] = useState([]);
+    const [ongoing, setOngoing] = useState([]);
+    const [ended, setEnded] = useState([]);
+    const [user, setUser] = useState(0);
+    
+    const getTx = async ({time, address, number}) => {
+        const params = {
+            start_time: time[0],
+            end_time: time[1],
+            limit: 1,
+            pair_address: address
+        };
+        const res = await getSwapTx(activeNetwork, params);
+        if (res.code === 1) {
+            const {total} = res.data;
+            const txtotal = total || 0;
+            const num = Number(number.replace(/,/g, ''))
+            const perc = txtotal / num * 100;
+            return {perc, total: txtotal};
+        }
+    };
+    
+    const getVol = async ({time, address, number}) => {
+        const params = {
+            start_time: time[0],
+            end_time: time[1],
+            limit: 1,
+            pair_address: address
+        };
+        const res = await getSwapRank(activeNetwork, params);
+        if (res.code === 1) {
+            const {total} = res.data;
+            const voltotal = total || 0;
+            const num = Number(number.replace(/,/g, ''))
+            const perc = voltotal / num * 100;
+            return {perc, total:voltotal};
+        }
+    };
+    
+    const handleList = async (data) => {
+        const promises = data.map(async item => {
+            const detailsPromises = item.details.map(async det => {
+                if(det.value === null) {
+                    const param = {
+                        time: item.cycle,
+                        address: item.pair_address,
+                        number: det.number
+                    };
+                    let result;
+                    if (det.type === 1) {
+                        result = await getTx(param);
+                    } else {
+                        result = await getVol(param);
+                    }
+                    if (result) {
+                        det.value = numFloor(result.total);
+                        det.percen = result.perc;
+                    }
+                }
+                return det;
+            });
+            item.details = await Promise.all(detailsPromises);
+            return item;
+        });
+    
+        const updatedData = await Promise.all(promises);
+        setOngoing(updatedData);
+    };
 
+    useEffect(() => {
+        let comList = []
+        let ongoList = []
+        let endList = []
+        const date = new Date();
+
+        activityList.forEach(item => {
+            const startDate = new Date(item.cycle[0]);
+            const endDate = new Date(item.cycle[1]);
+            console.log(item.name, date, startDate, endDate);
+
+            if (startDate > date) {
+                comList.push(item);
+            } else if (startDate < date && endDate > date) {
+                ongoList.push(item);
+            } else {
+                endList.push(item);
+            }
+        });
+        
+        setComing(comList)
+        setEnded(endList)
+        handleList(ongoList)
+        const timer = setInterval(() => {
+            handleList(ongoList);
+        }, 60000);
+
+        return () => clearInterval(timer);
+    }, [activityList]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const param = {
+                start_time: 1717502400000,
+                end_time: 1717847940000,
+                limit: 1
+            };
+            try {
+                const res = await getSwapTx(activeNetwork, param);
+                if (res.code === 1) {
+                    const { user_count } = res.data;
+                    setUser(user_count);
+                }
+            } catch (error) {
+                console.error("Failed to fetch data", error);
+            }
+        };
+
+        fetchData();
+    }, [activeNetwork]);
+
+    const toRoute = (route) => {
+        navigate(route)
+    }
     return(
         <PageBg>
             <PageWidth>
@@ -285,148 +434,164 @@ function Home() {
                     </MiddlePart>
                     <DataBox>
                         <DataStyle>
-                            <DataImg src={data1} w={48} h={48} hw={28} hh={28} />
+                            <DataImg src={data1} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
-                                <TextStyle size={16} color={'#E27625'}>Funded Project</TextStyle>
-                                <TextStyle size={24} color={'#000'}>4</TextStyle>
+                                <TextStyle size={16} hsize={14} color={'#E27625'}>{t('funded_project')}</TextStyle>
+                                <TextStyle size={24} hsize={16} color={'#000'}>3</TextStyle>
                             </div>
                         </DataStyle>
                         <DataStyle>
-                            <DataImg src={data2} w={48} h={48} hw={28} hh={28} />
+                            <DataImg src={data2} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
-                                <TextStyle size={16} color={'#E27625'}>Funded Project</TextStyle>
-                                <TextStyle size={24} color={'#000'}>4</TextStyle>
+                                <TextStyle size={16} hsize={14} color={'#E27625'}>{t('total_reward')}</TextStyle>
+                                <TextStyle size={24} hsize={16} color={'#000'}>$ 190,000</TextStyle>
                             </div>
                         </DataStyle>
                         <DataStyle>
-                            <DataImg src={data3} w={48} h={48} hw={28} hh={28} />
+                            <DataImg src={data3} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
-                                <TextStyle size={16} color={'#E27625'}>Funded Project</TextStyle>
-                                <TextStyle size={24} color={'#000'}>4</TextStyle>
+                                <TextStyle size={16} hsize={14} color={'#E27625'}>{t('trading_vol')}</TextStyle>
+                                <TextStyle size={24} hsize={16} color={'#000'}>{numFloor(user)}</TextStyle>
                             </div>
                         </DataStyle>
                     </DataBox>
-                    <TextCss>
-                        <TextStyle size={48} hsize={36} color={'#24282B'}>Coming Soon</TextStyle>
-                    </TextCss>
-                    <FlexGap gap={30} hgap={20}>
-                        <Coming>
-                            <ComingIn>
-                                <TextStyle size={18} hsize={14} color={'#E27625'}>Trade CBD to Split  [$50,000 BTC + 100,000,000 CBDs + 50,000 veMACAs]</TextStyle>
-                                <FlexGap gap={20} hgap={26}>
-                                    <ProjectName>
-                                        <DataImg src={data1} w={60} h={60} hw={43} hh={43} />
-                                        <TextStyle size={36} hsize={20} color={'#000'}>CBD</TextStyle>
-                                    </ProjectName>
-                                    <FlexGap gap={30} hgap={24}>
-                                        <FlexGap gap={14} hgap={14}>
-                                            <GaugeMini percentage={0} />
-                                            <RightWidth>
-                                                <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                                <TextStyle size={16} color={'#24282B'}>100,000</TextStyle>
-                                            </RightWidth>
-                                        </FlexGap>
-                                        <FlexGap gap={14} hgap={14}>
-                                            <GaugeMini percentage={0} color={'#FFCC14'} />
-                                            <RightWidth>
-                                                <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                                <TextStyle size={16} color={'#24282B'}>100,000</TextStyle>
-                                            </RightWidth>
-                                        </FlexGap>
-                                    </FlexGap>
-                                </FlexGap>
-                            </ComingIn>
-                            <CalendarBox>
-                                <Calendar>
-                                    <Month>
-                                        <TextStyle size={16} hsize={14} color={'#FEFEFE'}>JULY</TextStyle>
-                                    </Month>
-                                    <Day>
-                                        <TextStyle size={36} hsize={24} color={'#6A6969'}>25</TextStyle>
-                                    </Day>
-                                </Calendar>
-                                <TextStyle size={16} hsize={12} color={'#6A6969'}>16:00 UTC+8</TextStyle>
-                            </CalendarBox>
-                        </Coming>
-                    </FlexGap>
-                    <TextCss>
-                        <TextStyle size={48} hsize={36} color={'#24282B'}>Ongoing</TextStyle>
-                    </TextCss>
-                    <FlexGap gap={30} hgap={20}>
-                        <Ongoing>
-                            <TextStyle size={18} hsize={14} color={'#E27625'}>Trade CBD to Split  [$50,000 BTC + 100,000,000 CBDs + 50,000 veMACAs]</TextStyle>
-                            <OngoingIn>
-                                <ProjectNameTime>
-                                    <DataImg src={data1} w={60} h={60} hw={43} hh={43} />
-                                    <TextStyle size={36} hsize={20} color={'#000'}>CBD</TextStyle>
-                                    <CountdownMini endDate={'2024-07-22 20:00:00'} startDate={'2024-6-12 00:00:00'}/>
-                                </ProjectNameTime>
-                                <FlexGap gap={40} hgap={24}>
-                                    <FlexGap gap={14} hgap={14}>
-                                        <GaugeMini percentage={80} />
-                                        <RightWidth>
-                                            <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                            <FlexGap gap={0} hgap={0}>
-                                                <TextStyle size={16} color={'#24282B'}>9,999</TextStyle>
-                                                <TextStyle size={16} color={'#999'}>/100,000</TextStyle>
+                    { coming.length &&
+                        <>
+                            <TextCss>
+                                <TextStyle size={48} hsize={36} color={'#24282B'}>{t('coming_soon')}</TextStyle>
+                            </TextCss>
+                            <FlexGap gap={30} hgap={20}>
+                                { coming.map((row, key) => (
+                                    <Coming key={key}>
+                                        <ComingIn>
+                                            <TextStyle size={18} hsize={14} color={'#E27625'}>{t(row.describe)}</TextStyle>
+                                            <FlexGap gap={20} hgap={26}>
+                                                <ProjectName>
+                                                    <DataImg src={row.image} w={60} h={60} hw={43} hh={43} />
+                                                    <TextStyle size={36} hsize={20} color={'#000'}>{row.name}</TextStyle>
+                                                </ProjectName>
+                                                <FlexGap gap={30} hgap={24}>
+                                                    { row.details.map((item, itemkey) => (
+                                                        <FlexGap gap={14} hgap={14}>
+                                                            <GaugeMini percentage={0} />
+                                                            <RightWidth>
+                                                                <TextStyle size={14} color={'#6A6969'}>{t(item.title)}</TextStyle>
+                                                                <TextStyle size={16} color={'#24282B'}>{item.number}</TextStyle>
+                                                            </RightWidth>
+                                                        </FlexGap>
+                                                    ))
+                                                    }
+                                                </FlexGap>
                                             </FlexGap>
-                                        </RightWidth>
-                                    </FlexGap>
-                                    <FlexGap gap={14} hgap={14}>
-                                        <GaugeMini percentage={100} color={'#FFCC14'} />
-                                        <RightWidth>
-                                            <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                            <FlexGap gap={0} hgap={0}>
-                                                <TextStyle size={16} color={'#24282B'}>$ 9,999,999.99</TextStyle>
-                                                <TextStyle size={16} color={'#999'}>/$2,000,000</TextStyle>
-                                            </FlexGap>
-                                        </RightWidth>
-                                    </FlexGap>
-                                </FlexGap>
-                            </OngoingIn>
-                        </Ongoing>
-                    </FlexGap>
-                    <TextCss>
-                        <TextStyle size={48} hsize={36} color={'#24282B'}>Ended</TextStyle>
-                    </TextCss>
-                    <EndList>
-                        <Ended>
-                            <EndedIn>
-                                <ProjectName>
-                                    <LogoImg src={data1} w={60} h={60} hw={43} hh={43} />
-                                    <TextStyle size={36} hsize={20} color={'#000'}>CBD</TextStyle>
-                                </ProjectName>
-                                <EndedBtn>
-                                    <TextStyle size={16} color={'#000'}>End in June 15</TextStyle>
-                                </EndedBtn>
-                            </EndedIn>
-                            <TextBott>
-                                <TextStyle size={14} color={'#E27625'}>Trade CBD to Split  [$50,000 BTC + 100,000,000 CBDs + 50,000 veMACAs] </TextStyle>
-                            </TextBott>
-                            <FlexGap gap={30} hgap={24}>
-                                <FlexGap gap={14} hgap={14}>
-                                    <GaugeMini percentage={80} />
-                                    <div>
-                                        <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                        <FlexGap gap={0} hgap={0}>
-                                            <TextStyle size={16} color={'#24282B'}>9,999</TextStyle>
-                                            <TextStyle size={16} color={'#999'}>/100,000</TextStyle>
-                                        </FlexGap>
-                                    </div>
-                                </FlexGap>
-                                <FlexGap gap={14} hgap={14}>
-                                    <GaugeMini percentage={100} color={'#FFCC14'} />
-                                    <div>
-                                        <TextStyle size={14} color={'#6A6969'}>Real-time TX Number</TextStyle>
-                                        <FlexGap gap={0} hgap={0}>
-                                            <TextStyle size={16} color={'#24282B'}>$ 9,999,999.99</TextStyle>
-                                            <TextStyle size={16} color={'#999'}>/$2,000,000</TextStyle>
-                                        </FlexGap>
-                                    </div>
-                                </FlexGap>
+                                        </ComingIn>
+                                        <CalendarBox>
+                                            <Calendar>
+                                                <Month>
+                                                    <TextStyle size={16} hsize={14} color={'#FEFEFE'}>{t(row.month)}</TextStyle>
+                                                </Month>
+                                                <Day>
+                                                    <TextStyle size={36} hsize={24} color={'#6A6969'}>{row.day}</TextStyle>
+                                                </Day>
+                                            </Calendar>
+                                            <TextStyle size={16} hsize={12} color={'#6A6969'}>{row.time}</TextStyle>
+                                        </CalendarBox>
+                                    </Coming>
+                                ))
+                                }
                             </FlexGap>
-                        </Ended>
-                    </EndList>
+                        </>
+                    }
+                    { ongoing.length>0 &&
+                        <>
+                            <TextCss>
+                                <TextStyle size={48} hsize={36} color={'#24282B'}>{t('ongoing')}</TextStyle>
+                            </TextCss>
+                            <FlexGap gap={30} hgap={20}>
+                                { ongoing.map((row, key) => (
+                                    <Ongoing onClick={() => toRoute(row.route)}>
+                                        <TextStyle size={18} hsize={14} color={'#E27625'}>{t(row.describe)}</TextStyle>
+                                        <OngoingIn>
+                                            <ProjectNameTime>
+                                                <FlexGap gap={12} hgap={8}>
+                                                    <DataImg src={row.image} w={60} h={60} hw={43} hh={43} />
+                                                    <TextStyle size={36} hsize={20} color={'#000'}>{row.name}</TextStyle>
+                                                </FlexGap>
+                                                <CountdownMini endDate={row.end} startDate={row.start}/>
+                                            </ProjectNameTime>
+                                            <FlexGap gap={40} hgap={24}>
+                                                {row.details.map((item, itemkey) => (
+                                                    <FlexGap gap={14} hgap={14} key={itemkey}>
+                                                        <GaugeMini percentage={item.percen} color={item.color} />
+                                                        <RightWidth>
+                                                            <TextStyle size={14} color={'#6A6969'}>{t(item.title)}</TextStyle>
+                                                            <FlexGap gap={0} hgap={0}>
+                                                                <TextStyle size={16} color={'#24282B'}>{item.type === 1? item.value: `$ ${item.value}`}</TextStyle>
+                                                                {
+                                                                    item.type === 1?
+                                                                    <TextStyle size={16} color={'#999'}>{item.number? `/${item.number}`: '' }</TextStyle>
+                                                                    :
+                                                                    <TextStyle size={16} color={'#999'}>{item.number? `/$${item.number}`: '' }</TextStyle>
+                                                                }
+                                                            </FlexGap>
+                                                        </RightWidth>
+                                                    </FlexGap>
+                                                ))}
+                                            </FlexGap>
+                                        </OngoingIn>
+                                    </Ongoing>
+                                ))}
+                            </FlexGap>
+                        </>
+                    }
+                    { ended.length > 0 &&
+                        <>
+                            <TextCss>
+                                <TextStyle size={48} hsize={36} color={'#24282B'}>{t('ended')}</TextStyle>
+                            </TextCss>
+                            <EndList>
+                                {ended.map((row, index) => (
+                                    <Ended key={index} onClick={() => toRoute(row.route)}>
+                                        <EndedIn>
+                                            <ProjectName>
+                                                <LogoImg src={row.image} w={60} h={60} hw={43} hh={43} />
+                                                <TextStyle size={36} hsize={20} color={'#000'}>{row.name}</TextStyle>
+                                            </ProjectName>
+                                            <EndedBtn>
+                                                <TextStyle size={16} color={'#000'}>{t('end_in')}{t(row.monthEnd)} {row.dayEnd}</TextStyle>
+                                            </EndedBtn>
+                                        </EndedIn>
+                                        <TextBott>
+                                            <TextStyle size={14} color={'#E27625'}>{t(row.describe)}</TextStyle>
+                                        </TextBott>
+                                        <FlexGap gap={30} hgap={24}>
+                                            {row.details.map((item, itemkey) => (
+                                                <FlexGap gap={14} hgap={14} key={itemkey}>
+                                                    <GaugeMini percentage={item.percen} color={item.color} />
+                                                    <div>
+                                                        <TextStyle size={14} color={'#6A6969'}>{t(item.title)}</TextStyle>
+                                                        <FlexGap gap={0} hgap={0}>
+                                                            {
+                                                                item.type === 1?
+                                                                <>
+                                                                    <TextStyle size={16} color={'#24282B'}>{item.value? item.value : <Skeleton width={60} height={16} />}</TextStyle>
+                                                                    <TextStyle size={16} color={'#999'}>{item.number? `/${item.number}`: '' }</TextStyle>   
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <TextStyle size={16} color={'#24282B'}>{item.value? `$ ${item.value}`: <Skeleton width={60} height={16} />}</TextStyle>
+                                                                    <TextStyle size={16} color={'#999'}>{item.number? `/$${item.number}`: '' }</TextStyle>
+                                                                </>
+                                                            }
+                                                        </FlexGap>
+                                                    </div>
+                                                </FlexGap>
+                                            ))}
+                                        </FlexGap>
+                                    </Ended>
+                                ))}
+                            </EndList>
+                        </>
+                    }
                 </Wrapper>
             </PageWidth>
             <PageBottom />

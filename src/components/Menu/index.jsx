@@ -13,11 +13,6 @@ import LanuagePage from "../LanuagePage";
 import { useTranslation } from 'react-i18next';
 import Wallet from "../Wallet";
 import fireimgIcon from '../../assets/img/fire.png'
-import menuBox from '../../assets/img/menuBox.png'
-import lorenzo from '../../assets/img/lorenzo.png'
-import satoshi from '../../assets/img/satoshi.png'
-import cbd from '../../assets/img/cbd.png'
-import runesx from '../../assets/img/runesx.png'
 
 const Wrapper = styled.div`
     display: flex;
@@ -117,7 +112,6 @@ const StyledNavLink = styled.div`
             transform: skewX(15deg);
         }
     }
-   
 `
 const H5menu = styled.div`
     cursor: pointer;
@@ -204,42 +198,6 @@ const FireimgIcon = styled.img`
     height: 24px;
     transform: skewX(15deg);
 `
-
-const CompetitionMenu = styled.div`
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 178px;
-    height: 144px;
-    padding: 43px 0px 0px 30px;
-    background-image: url(${menuBox});
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    z-index: 99;
-    box-sizing: border-box;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    transform: skewX(15deg);
-`
-const IconBox = styled.div`
-    display: flex;
-    width: 28px;
-    height: 28px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 9999px;
-    border: 1px solid var(--Black, #24282B);
-    background: var(--White, #FFF);
-    box-shadow: 2px 2px 0px 0px #000;
-`
-const LogoIcon = styled.img`
-    width: 100%;
-    height: 100%;
-`
 const activeclassname = 'active'
 const RouterNavLink = styled(NavLink).attrs({
     activeclassname,
@@ -247,20 +205,23 @@ const RouterNavLink = styled(NavLink).attrs({
     outline: none;
     cursor: pointer;
     text-decoration: none;
-    line-height: 20.64px;
+    text-align: center;
+    min-width: 114px;
+    height: 100%;
+    padding: 0 20px;
+    line-height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    gap: 16px;
-    &.${activeclassname} {
-          div {
-            color: #FFCC14;
-          }
-    }
-    &:hover {
+    position: relative;
+    &.active {
+        color: #fff;
+        background: #000;
+        transform: skewX(-15deg);
+        z-index: 99;
         span {
-            color: #FFCC14;
+            transform: skewX(15deg);
         }
     }
 `
@@ -347,32 +308,12 @@ function Menu() {
                     <StyledNavLink onClick={() => selectChange('/ecosystem')}>
                         <TextStyle color={'#0b0f17'} size={16}>{t('ecosystem')}</TextStyle>
                     </StyledNavLink>
-                    <StyledNavLink className={'active'}  ref={btnRefCompt} onClick={showComptMenu}>
+                    <RouterNavLink className={'active'} to='/' ref={btnRefCompt} onClick={showComptMenu}>
                         <FireimgIcon src={fireimgIcon} />
                         <span>
                             <TextStyle color={'#fff'} size={16}>{t('competition')}</TextStyle>
                         </span>
-                        {showCompt && <CompetitionMenu ref={refCompt}>
-                            <RouterNavLink to='/runesx'>
-                                <IconBox>
-                                    <LogoIcon src={runesx} />
-                                </IconBox>
-                                <TextStyle color={'#24282B'} size={16}><span>RunesX</span></TextStyle>
-                            </RouterNavLink>
-                            <RouterNavLink to='/satoshi'>
-                                <IconBox>
-                                    <LogoIcon src={satoshi} />
-                                </IconBox>
-                                <TextStyle color={'#24282B'} size={16}><span>Satoshi</span></TextStyle>
-                            </RouterNavLink>
-                            {/* <ComptMenu onClick={() => navigate('/lorenzo')}>
-                                <IconBox>
-                                    <LogoIcon src={lorenzo} />
-                                </IconBox>
-                                <TextStyle color={'#24282B'} size={16}><span>Lorenzo</span></TextStyle>
-                            </ComptMenu> */}
-                        </CompetitionMenu>}
-                    </StyledNavLink>
+                    </RouterNavLink>
                 </Gap>
             </LeftMenuBox>
             <MiniMenu>

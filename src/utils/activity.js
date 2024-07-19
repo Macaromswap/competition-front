@@ -14,6 +14,6 @@ export const satEndCountdown = '2024-06-25 00:00:00'
 // x活动开始时间和结束时间
 export const xTime = [1721044800000, 1721649600000] //2024-07-15 20:00:00, 2024-07-22 20:00:00
 
-// sat倒计时开始时间 和 结束时间
+// x倒计时开始时间 和 结束时间
 export const xStartCountdown = '2024-07-15 20:00:00'
 export const xEndCountdown = '2024-07-22 20:00:00'

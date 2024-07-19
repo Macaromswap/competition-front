@@ -1,0 +1,121 @@
+[{
+        "name": "X",
+        "pair_address": "0x9b6874b75a7fb169042029e96159566b4bc8a195",
+        "image": "https://static.macaron.xyz/tokens/X.OT.png",
+        "describe": "runesx_describe",
+        "cycle": [1721620800000, 1722225600000],
+        "start": "2024-07-22 20:00:00",
+        "end": "2024-07-29 20:00:00",
+        "month": "july",
+        "day": "22",
+        "time": "20:00",
+        "monthEnd": "july",
+        "dayEnd": "29",
+        "route": "/runesx",
+        "details": [{
+            "title": "tx_number",
+            "value": null,
+            "percen": null,
+            "number": "100,000",
+            "color": "#6fd765",
+            "type": 1
+        }, {
+            "title": "trading_vol",
+            "value": null,
+            "percen": null,
+            "number": "2,000,000",
+            "color": "#FFCC14",
+            "type": 2
+        }]
+    },
+    {
+        "name": "RuneX",
+        "pair_address": "0x9b6874b75a7fb169042029e96159566b4bc8a195",
+        "image": "https://static.macaron.xyz/tokens/X.OT.png",
+        "describe": "runesx_describe",
+        "cycle": [1721044800000, 1721649600000],
+        "start": "2024-07-15 20:00:00",
+        "end": "2024-07-22 20:00:00",
+        "month": "july",
+        "day": "15",
+        "time": "20:00",
+        "monthEnd": "july",
+        "dayEnd": "22",
+        "route": "/runesx",
+        "details": [{
+            "title": "tx_number",
+            "value": null,
+            "percen": null,
+            "number": "100,000",
+            "color": "#6fd765",
+            "type": 1
+        }, {
+            "title": "trading_vol",
+            "value": null,
+            "percen": null,
+            "number": "2,000,000",
+            "color": "#FFCC14",
+            "type": 2
+        }]
+    },
+    {
+        "name": "SAT",
+        "pair_address": "0x575212a8763db6bbaf67461440246546d4017707",
+        "image": "https://static.macaron.xyz/tokens/SAT.png",
+        "describe": "sat_describe",
+        "cycle": [1718769600000, 1719244800000],
+        "start": "2024-06-19 12:00:00",
+        "end": "2024-06-25 00:00:00",
+        "month": "june",
+        "day": "19",
+        "time": "12:00",
+        "monthEnd": "june",
+        "dayEnd": "25",
+        "route": "/satoshi",
+        "details": [{
+            "title": "tx_number",
+            "value": "81,393",
+            "number": "80,000",
+            "percen": "100",
+            "color": "#6fd765",
+            "type": 1
+        }, {
+            "title": "accumulated",
+            "value": "817,390.47",
+            "number": "2,000,000",
+            "percen": "40.86",
+            "color": "#FFCC14",
+            "type": 1
+        }]
+    },
+    {
+        "name": "CBD",
+        "pair_address": "0x7297ed0f530172e69d7f0b8e73a7c303edb80478",
+        "image": "https://static.macaron.xyz/tokens/CBD.png",
+        "describe": "cbd_describe",
+        "cycle": [1717502400000, 1717847940000],
+        "start": "2024-06-04 19:59:00",
+        "end": "2024-06-08 19:59:00",
+        "month": "june",
+        "day": "04",
+        "time": "19:59",
+        "monthEnd": "june",
+        "dayEnd": "08",
+        "route": "/cbd",
+        "details": [{
+            "title": "tx_number",
+            "value": "101,485",
+            "number": "100,000",
+            "percen": "100",
+            "color": "#6fd765",
+            "type": 1
+        }, {
+            "title": "trading_volume",
+            "value": "2,432,872.25",
+            "number": "",
+            "percen": "100",
+            "color": "#FFCC14",
+            "type": 2
+        }]
+    }
+]
