@@ -15,7 +15,7 @@ import homebg from "../../assets/img/homebg.png";
 import homebgH5 from "../../assets/img/homebgH5.png";
 import tokenImg2 from "../../assets/img/tokenImg2.png";
 import tokenImg2h5 from "../../assets/img/tokenImg2h5.png";
-import activityList from "../../assets/json/activity.json";
+import activityList from "../../utils/activity.json";
 import Menu from '../../components/Menu'
 import PageBottom from "../../components/PageBottom";
 import GaugeMini from "../../components/GaugeMini";
@@ -455,7 +455,7 @@ function Home() {
                             </div>
                         </DataStyle>
                     </DataBox>
-                    { coming.length &&
+                    { coming.length > 0 &&
                         <>
                             <TextCss>
                                 <TextStyle size={48} hsize={36} color={'#24282B'}>{t('coming_soon')}</TextStyle>

@@ -55,7 +55,8 @@ const Gauge = ({ percentage=0, color="#6fd765" }) => {
     const size = '100%';
     const radius = 22; /* 将半径修改为42 */
     const circumference = 2 * Math.PI * radius;
-    const dashOffset = circumference * (1 - percentage / 102);
+    const perc = percentage > 100? 100 : numFloor(percentage)
+    const dashOffset = circumference * (1 - perc / 102);
 
     return (
         <Container>
@@ -71,7 +72,7 @@ const Gauge = ({ percentage=0, color="#6fd765" }) => {
                 />
             </Svg>
             <StatusText>
-                <TextStyle color={'#24282B'} size={12}>{percentage >=100 ?`100%`:`${numFloor(percentage)}%`}</TextStyle>
+                <TextStyle color={'#24282B'} size={12}>{perc}%</TextStyle>
             </StatusText>
         </Container>
     );
