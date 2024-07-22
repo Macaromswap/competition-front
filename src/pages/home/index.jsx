@@ -429,7 +429,7 @@ function Home() {
                 <Wrapper>
                     <MiddlePart>
                         <Title>
-                            <TextStyle size={56} hsize={34} color={'#24282B'}>
+                            <TextStyle size={56} hsize={32} color={'#24282B'}>
                                 {t('trading_competition')}
                             </TextStyle>
                         </Title>
@@ -454,7 +454,7 @@ function Home() {
                         <DataStyle>
                             <DataImg src={data3} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
-                                <TextStyle size={16} hsize={14} color={'#E27625'}>{t('trading_vol')}</TextStyle>
+                                <TextStyle size={16} hsize={14} color={'#E27625'}>{t('participant_count')}</TextStyle>
                                 <TextStyle size={24} hsize={16} color={'#000'}>{numFloor(user)}</TextStyle>
                             </div>
                         </DataStyle>
@@ -480,11 +480,10 @@ function Home() {
                                                             <GaugeMini percentage={0} />
                                                             <RightWidth>
                                                                 <TextStyle size={14} color={'#6A6969'}>{t(item.title)}</TextStyle>
-                                                                <TextStyle size={16} color={'#24282B'}>{item.number}</TextStyle>
+                                                                <TextStyle size={16} color={'#24282B'}>{item.type === 1?item.number: `$${item.number}`}</TextStyle>
                                                             </RightWidth>
                                                         </FlexGap>
-                                                    ))
-                                                    }
+                                                    ))}
                                                 </FlexGap>
                                             </FlexGap>
                                         </ComingIn>
@@ -500,8 +499,7 @@ function Home() {
                                             <TextStyle size={16} hsize={12} color={'#6A6969'}>{row.time}</TextStyle>
                                         </CalendarBox>
                                     </Coming>
-                                ))
-                                }
+                                ))}
                             </FlexGap>
                         </>
                     }
