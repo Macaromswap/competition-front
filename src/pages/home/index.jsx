@@ -448,7 +448,7 @@ function Home() {
                             <DataImg src={data2} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
                                 <TextStyle size={16} hsize={14} color={'#E27625'}>{t('total_reward')}</TextStyle>
-                                <TextStyle size={24} hsize={16} color={'#000'}>$ 190,000</TextStyle>
+                                <TextStyle size={24} hsize={16} color={'#000'}>$ 176,647.7</TextStyle>
                             </div>
                         </DataStyle>
                         <DataStyle>
