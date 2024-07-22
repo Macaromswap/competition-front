@@ -47,6 +47,7 @@ function App() {
     	<div className="App">
     	    <Routes>
     	      	<Route path="/" element={<Home />} />
+    	      	<Route path="/competition" element={<Home />} />
     	      	<Route path="/satoshi" element={<Satoshi />} />
     	      	<Route path="/runesx" element={<RunesX />}/>
     	      	<Route path="/cbd" element={<CBD />}/>
