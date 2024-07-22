@@ -32,6 +32,8 @@ const PageBg = styled.div`
     object-fit: contain;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
     @media screen and (max-width: 600px) {
         background-image: url(${homebgH5});
         background-position-y: 120px;
@@ -39,9 +41,13 @@ const PageBg = styled.div`
     }
 `
 const PageWidth = styled.div`
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0px 16px;
+    flex: 1;
 `
 const Wrapper = styled.div`
     padding: 0px 0 70px;
@@ -361,7 +367,7 @@ function Home() {
         });
     
         const updatedData = await Promise.all(promises);
-        setOngoing(updatedData);
+        return updatedData
     };
 
     useEffect(() => {
@@ -384,14 +390,12 @@ function Home() {
             }
         });
         
-        setComing(comList)
-        setEnded(endList)
-        handleList(ongoList)
-        const timer = setInterval(() => {
-            handleList(ongoList);
-        }, 60000);
+        setComing(comList);
 
-        return () => clearInterval(timer);
+        Promise.all([handleList(ongoList), handleList(endList)]).then(([ongoingData, endedData]) => {
+            setOngoing(ongoingData);
+            setEnded(endedData);
+        });
     }, [activityList]);
 
     useEffect(() => {
@@ -501,7 +505,7 @@ function Home() {
                             </FlexGap>
                         </>
                     }
-                    { ongoing.length>0 &&
+                    { ongoing.length > 0 &&
                         <>
                             <TextCss>
                                 <TextStyle size={48} hsize={36} color={'#24282B'}>{t('ongoing')}</TextStyle>
