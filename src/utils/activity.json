@@ -14,15 +14,15 @@
         "route": "/runesx",
         "details": [{
             "title": "tx_number",
-            "value": null,
-            "percen": null,
+            "value": "147,028",
+            "percen": "100",
             "number": "100,000",
             "color": "#6fd765",
             "type": 1
         }, {
             "title": "trading_vol",
-            "value": null,
-            "percen": null,
+            "value": "184,650.78",
+            "percen": "9.23",
             "number": "2,000,000",
             "color": "#FFCC14",
             "type": 2
