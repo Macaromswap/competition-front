@@ -455,7 +455,7 @@ function Home() {
                             <DataImg src={data3} w={48} h={48} hw={44} hh={44} />
                             <div style={{textAlign: "right"}}>
                                 <TextStyle size={16} hsize={14} color={'#E27625'}>{t('participant_count')}</TextStyle>
-                                <TextStyle size={24} hsize={16} color={'#000'}>{numFloor(user)}</TextStyle>
+                                <TextStyle size={24} hsize={16} color={'#000'}>26,853</TextStyle>
                             </div>
                         </DataStyle>
                     </DataBox>
