@@ -559,7 +559,7 @@ function Home() {
                                                 <TextStyle size={36} hsize={20} color={'#000'}>{row.name}</TextStyle>
                                             </ProjectName>
                                             <EndedBtn>
-                                                <TextStyle size={16} color={'#000'}>{t('end_in')}{t(row.monthEnd)} {row.dayEnd}</TextStyle>
+                                                <TextStyle size={16} color={'#000'}>{t('end_in')}{t(row.monthEnd)}{row.dayEnd}</TextStyle>
                                             </EndedBtn>
                                         </EndedIn>
                                         <TextBott>
